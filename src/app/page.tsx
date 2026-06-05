@@ -12,14 +12,16 @@ import { CallToAction } from "@/components/home/CallToAction"
 
 export default function HomePage() {
   return (
-    <div className="wrap relative z-[2]">
+    <>
       <HomeChrome />
-      <Hero />
-      <Technologies />
-      <About />
-      <Projects />
-      <Blog />
-      <CallToAction />
-    </div>
+      <div className="wrap relative z-[2]">
+        <Hero />
+        <Technologies />
+        <About />
+        <Projects />
+        <Blog />
+        <CallToAction />
+      </div>
+    </>
   )
 }

@@ -15,7 +15,7 @@ export function ContactForm() {
           ✓
         </div>
         <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-(--muted)">Message sent</p>
-        <p className="mt-3 text-[22px] font-semibold tracking-[-0.03em]">I'll be in touch soon.</p>
+        <p className="mt-3 text-[22px] font-semibold tracking-[-0.03em]">Thanks for reaching out.</p>
       </div>
     )
   }
@@ -23,7 +23,7 @@ export function ContactForm() {
   return (
     <div className="rounded-[28px] border border-(--line) bg-(--card) p-8 md:p-10">
       <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.26em] text-(--muted)">
-        Start a project
+        Send a message
       </p>
 
       <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }} className="space-y-5">
@@ -40,12 +40,12 @@ export function ContactForm() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Project type</span>
-            <input placeholder="Landing page, product UI…" className={field} />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Subject</span>
+            <input placeholder="A quick note about why you're writing" className={field} />
           </label>
           <label className="space-y-2">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Budget</span>
-            <input placeholder="Approx. budget or TBD" className={field} />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Context</span>
+            <input placeholder="Work, collaboration, feedback..." className={field} />
           </label>
         </div>
 
@@ -54,7 +54,7 @@ export function ContactForm() {
           <textarea
             required
             rows={6}
-            placeholder="Tell me about the project, timeline and goals…"
+            placeholder="Write your message here..."
             className={`${field} resize-none`}
           />
         </label>
@@ -66,7 +66,7 @@ export function ContactForm() {
             data-interactive="true"
           >
             <span className="cta-shape-fill" />
-            <span className="relative z-[1]">Send inquiry</span>
+            <span className="relative z-[1]">Send message</span>
             <span className="relative z-[1] text-[11px]">↗</span>
           </button>
         </div>

@@ -29,7 +29,7 @@ export const projects: Project[] = [
     id: "3",
     title: "The New York Times / The Guardian",
     description:
-      "Contributed to high-impact interactive projects featured in globally recognized publications. Focused on scalable front-end architecture and semantic code.",
+      "Contributed to high-impact interactive work featured in globally recognized publications, with attention to scalable front-end architecture and semantic structure.",
     technologies: ["HTML5", "SCSS", "JavaScript", "REST APIs"],
     demoUrl: "#",
     featured: true,
@@ -41,11 +41,11 @@ export const projects: Project[] = [
     id: "4",
     title: "Simbweb",
     description:
-      "Founded and led a digital agency for over 5 years. Managed project flow, business administration, and client relationships while delivering full-stack solutions.",
+      "Founded and led a digital agency for over 5 years. That period built a broader foundation in delivery, client relationships, operations and digital execution.",
     technologies: ["PHP", "JavaScript", "jQuery", "MySQL"],
     demoUrl: "#",
     featured: true,
     category: "personal",
-    role: "Founder & Developer",
+    role: "Founder",
   },
 ]

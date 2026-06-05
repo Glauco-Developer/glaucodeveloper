@@ -53,13 +53,13 @@ export function Hero() {
 
           <h1 className="text-[clamp(38px,6.2vw,92px)] font-semibold leading-[0.94] tracking-[-0.05em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
             <motion.span {...fadeUp(0.45)} className="block">
-              18 years of code,
+              18 years online,
             </motion.span>
             <motion.span {...fadeUp(0.58)} className="block font-light text-white/55">
-              global expertise,
+              global work,
             </motion.span>
             <motion.span {...fadeUp(0.68)} className="block">
-              one sharp eye.
+              sharp eye.
             </motion.span>
           </h1>
 
@@ -67,7 +67,7 @@ export function Hero() {
             {...fadeUp(0.85)}
             className="mt-[22px] max-w-[520px] text-[15px] leading-[1.75] text-white/72 sm:text-[16px]"
           >
-            Senior Engineer with a background in <b className="font-semibold text-white">international product teams</b> — award-winning projects, front-end craft, and currently specializing in <b className="font-semibold text-white">Applied AI Engineering</b>.
+            A digital professional shaped by <b className="font-semibold text-white">international product teams</b>, creative studios and years running his own agency — with a strong eye for interfaces and a current focus on <b className="font-semibold text-white">Applied AI Engineering</b>.
           </motion.p>
 
           <motion.div
@@ -80,7 +80,7 @@ export function Hero() {
               data-interactive="true"
             >
               <span className="cta-shape-fill" />
-              <span className="relative z-[1]">View work</span>
+              <span className="relative z-[1]">See selected work</span>
             </a>
             <a
               href="#contact"
@@ -88,7 +88,7 @@ export function Hero() {
               data-interactive="true"
             >
               <span className="cta-shape-fill" />
-              <span className="relative z-[1]">Get in touch</span>
+              <span className="relative z-[1]">Contact</span>
             </a>
           </motion.div>
         </div>

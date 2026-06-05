@@ -5,8 +5,8 @@ import { motion, useInView, useMotionValue, useTransform, animate } from "framer
 import { useRef } from "react"
 
 const stats = [
-  { value: 18, suffix: "", label: "years building for the web across international markets" },
-  { value: 5, suffix: "", label: "years in business management, deadlines and client support" },
+  { value: 18, suffix: "", label: "years working across web, product and digital experiences" },
+  { value: 5, suffix: "", label: "years leading an agency across delivery, clients and operations" },
   { value: 6, suffix: "+", label: "international recognitions — Awwwards, Spiders, CSS Awards and CommArts" },
 ]
 
@@ -77,9 +77,9 @@ export function About() {
         >
           I&apos;ve been building for the web since 2008 —{" "}
           <span className="text-[var(--muted)]">
-            in agencies, as a founder, and as a senior engineer for global products
+            across agency leadership, hands-on production, and senior roles on global digital products
           </span>
-          . I care about semantics, optimization, SEO, and currently exploring the intersection of <span className="text-[var(--ink)] font-medium">Applied AI Engineering</span>.
+          . That path gave me a broader view than just shipping code: product judgment, communication, delivery, and currently a deeper exploration into <span className="text-[var(--ink)] font-medium">Applied AI Engineering</span>.
         </motion.p>
 
         <div className="mt-24 space-y-12" ref={statsRef}>

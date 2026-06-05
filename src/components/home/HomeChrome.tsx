@@ -27,21 +27,6 @@ export function HomeChrome() {
     }
   }, [showLoader])
 
-  useEffect(() => {
-    function onScroll() {
-      const total = document.body.scrollHeight - window.innerHeight
-      const progress = total > 0 ? (window.scrollY / total) * 100 : 0
-      document.documentElement.style.setProperty("--scroll-progress", `${progress}%`)
-    }
-
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-    }
-  }, [])
-
   return (
     <>
       <div className="pointer-events-none fixed inset-0 z-[1] opacity-[0.045] home-grain" />
@@ -49,7 +34,6 @@ export function HomeChrome() {
         <div className="ambient-orb ambient-orb-one" />
         <div className="ambient-orb ambient-orb-two" />
       </div>
-      <div className="fixed left-0 top-0 z-[300] h-0.5 w-[var(--scroll-progress)] bg-[var(--ink)]" />
       {showLoader && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[var(--bg)]">
           <div className="flex flex-col items-center gap-5">

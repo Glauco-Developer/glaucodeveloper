@@ -19,10 +19,6 @@ export default function AboutPage() {
             <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[var(--muted)]">
               About / Practice
             </p>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Available for work
-            </span>
           </div>
 
           <h1 className="mt-8 text-[clamp(46px,7.5vw,120px)] font-semibold leading-[0.92] tracking-[-0.06em]">
@@ -30,8 +26,8 @@ export default function AboutPage() {
           </h1>
 
           <p className="mt-8 max-w-[52ch] text-[18px] leading-[1.7] text-[var(--muted)]">
-            I build interfaces with visual control, precise motion and code
-            structured for product, marketing and design systems.
+            I work at the intersection of interface, product thinking and delivery
+            discipline, with attention to motion, clarity and long-term structure.
           </p>
         </section>
 

@@ -22,9 +22,9 @@ export function CallToAction() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-10 text-[clamp(36px,7vw,110px)] font-semibold leading-none tracking-[-0.04em]"
         >
-          Let&apos;s build
+          Open for
           <br />
-          something strong.
+          conversation.
         </motion.h2>
 
         <motion.a

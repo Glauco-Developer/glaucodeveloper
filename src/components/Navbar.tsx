@@ -9,7 +9,7 @@ import { useTheme } from "./ThemeProvider"
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/#work" },
+  { label: "Work", href: "/work" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -23,7 +23,6 @@ export function Navbar() {
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/"
-    if (href === "/#work") return false
     return pathname === href || pathname.startsWith(href + "/")
   }
 
@@ -50,37 +49,11 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="flex items-center gap-3 text-[var(--nav-ink)]"
+          className="flex items-center text-[var(--nav-ink)]"
           data-interactive="true"
         >
-          <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[var(--line)] bg-[var(--card)] shadow-sm transition-transform duration-500 hover:scale-110">
-            {/* Stylish SVG Avatar Logo with Beard */}
-            <svg
-              viewBox="0 0 100 100"
-              className="h-8 w-8 text-[var(--ink)]"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="50" cy="45" r="22" stroke="currentColor" strokeWidth="2.5" />
-              <path
-                d="M30 65C30 58 35 52 42 50L50 55L58 50C65 52 70 58 70 65V75C70 82 65 88 58 90H42C35 88 30 82 30 75V65Z"
-                fill="currentColor"
-                opacity="0.15"
-              />
-              <path
-                d="M32 68C32 68 38 78 50 78C62 78 68 68 68 68V75C68 83 60 88 50 88C40 88 32 83 32 75V68Z"
-                fill="currentColor"
-              />
-              <path
-                d="M42 45C42 45 44 48 50 48C56 48 58 45 58 45"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <span className="font-mono text-[15px] font-semibold tracking-[-0.04em]">
-            glaucodeveloper<b className="text-violet-500">.</b>
+          <span className="font-mono text-[16px] font-medium tracking-[-0.02em]">
+            glauco<span className="text-[var(--muted)]">developer</span><b className="text-violet-500 ml-0.5">_</b>
           </span>
         </Link>
 

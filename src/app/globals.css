@@ -17,7 +17,6 @@
   --blob: 0, 0, 0;
   --nav-ink: #0a0a0a;
   --nav-muted: #717171;
-  --scroll-progress: 0%;
   --accent: #7c3aed;
 }
 
@@ -46,10 +45,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {

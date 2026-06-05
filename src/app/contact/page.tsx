@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { ContactForm } from "@/components/contact/ContactForm"
 
-const services = [
-  "Landing pages & marketing sites",
-  "Product UI & design systems",
-  "Interface redesigns",
-  "Front-end from Figma",
+const focusAreas = [
+  "Interface systems and front-end craft",
+  "Applied AI exploration",
+  "Product-minded execution",
+  "Digital work shaped by international teams",
 ]
 
 const markets = ["Ireland", "United Kingdom", "Belgium", "Switzerland", "United States", "Brazil"]
@@ -18,16 +18,12 @@ export default function ContactPage() {
         {/* ── Heading ────────────────────────────────────────────── */}
         <div className="mb-14 border-b border-(--line) pb-12">
           <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-(--muted)">
-            Contact / Projects
+            Contact / Profile
           </p>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
             <h1 className="max-w-[14ch] text-[clamp(40px,6vw,96px)] font-semibold leading-[0.93] tracking-tighter">
-              Let's make the interface feel sharper.
+              A direct line to the person behind the work.
             </h1>
-            <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-(--line) px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-(--muted)">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Accepting projects
-            </span>
           </div>
         </div>
 
@@ -55,10 +51,10 @@ export default function ContactPage() {
 
             <div className="mt-7 border-b border-(--line) pb-7">
               <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-(--muted)">
-                What I take on
+                Current focus
               </p>
               <ul className="mt-4 space-y-3">
-                {services.map((s) => (
+                {focusAreas.map((s) => (
                   <li key={s} className="flex items-start gap-3 text-[14px] text-(--muted)">
                     <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-(--muted)" />
                     {s}
@@ -69,7 +65,7 @@ export default function ContactPage() {
 
             <div className="mt-7">
               <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-(--muted)">
-                Working globally
+                Places in the journey
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {markets.map((m) => (

@@ -13,7 +13,7 @@ const principles = [
   },
   {
     title: "Readable engineering",
-    text: "The code should be as intentional as the UI, with structure that survives the next feature wave.",
+    text: "The implementation should support the idea clearly, with structure that stays useful as the product evolves.",
   },
 ]
 
@@ -30,8 +30,8 @@ const timeline = [
   },
   {
     year: "2008—2013",
-    title: "Founder & Developer at Simbweb",
-    text: "Started my journey by founding a digital agency, managing full-stack development and business administration for over 5 years.",
+    title: "Founder at Simbweb",
+    text: "My early years were shaped by running a digital agency, balancing delivery, client relationships, process and the day-to-day reality of building digital work.",
   },
 ]
 
