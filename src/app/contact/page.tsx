@@ -16,7 +16,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-[1600px]">
 
         {/* ── Heading ────────────────────────────────────────────── */}
-        <div className="mb-14 border-b border-(--line) pb-12">
+        <div className="animate-fade-up mb-14 border-b border-(--line) pb-12">
           <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-(--muted)">
             Contact / Profile
           </p>
@@ -28,9 +28,12 @@ export default function ContactPage() {
         </div>
 
         {/* ── Body ───────────────────────────────────────────────── */}
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:items-start">
+        <div
+          className="animate-fade-up grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:items-start"
+          style={{ animationDelay: "0.1s" }}
+        >
 
-          {/* Left panel ─ dark card */}
+          {/* Left panel */}
           <div className="rounded-[28px] bg-(--bg-2) p-8 lg:sticky lg:top-32">
             <a
               href="mailto:glauco.developer@gmail.com"

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 
 const principles = [
   {
@@ -35,9 +35,32 @@ const timeline = [
   },
 ]
 
+function useInViewOnce(margin = "-80px") {
+  const ref = useRef<HTMLElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setIsInView(true); observer.disconnect() } },
+      { rootMargin: margin }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [margin])
+
+  return { ref, isInView }
+}
+
 export function AboutTimeline() {
+  const { ref, isInView } = useInViewOnce()
+
   return (
-    <section className="grid gap-12 border-b border-[var(--line)] pb-16 lg:grid-cols-[0.9fr_1.1fr]">
+    <section
+      ref={ref}
+      className="grid gap-12 border-b border-[var(--line)] pb-16 lg:grid-cols-[0.9fr_1.1fr]"
+    >
       <div>
         <p className="font-mono text-[12px] uppercase tracking-[0.24em] text-[var(--muted)]">
           Timeline
@@ -49,26 +72,23 @@ export function AboutTimeline() {
 
       <div className="space-y-8">
         {timeline.map((item, index) => (
-          <motion.div
+          <div
             key={item.year}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: index * 0.08 }}
-            className="grid gap-4 border-t border-[var(--line)] pt-6 md:grid-cols-[90px_1fr]"
+            className={`grid gap-4 border-t border-[var(--line)] pt-6 md:grid-cols-[90px_1fr] ${
+              isInView ? "animate-fade-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: `${index * 0.08}s` }}
           >
             <div className="font-mono text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
               {item.year}
             </div>
             <div>
-              <h3 className="text-[24px] font-semibold tracking-[-0.03em]">
-                {item.title}
-              </h3>
+              <h3 className="text-[24px] font-semibold tracking-[-0.03em]">{item.title}</h3>
               <p className="mt-3 max-w-[44ch] text-[15px] leading-7 text-[var(--muted)]">
                 {item.text}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
@@ -76,27 +96,24 @@ export function AboutTimeline() {
 }
 
 export function AboutPrinciples() {
+  const { ref, isInView } = useInViewOnce()
+
   return (
-    <section className="mt-16 grid gap-6 lg:grid-cols-3">
+    <section ref={ref} className="mt-16 grid gap-6 lg:grid-cols-3">
       {principles.map((item, index) => (
-        <motion.article
+        <article
           key={item.title}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: index * 0.08 }}
-          className="group rounded-[22px] border border-[var(--line)] bg-[color:color-mix(in_srgb,var(--card)_88%,transparent)] p-7 transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5"
+          className={`group rounded-[22px] border border-[var(--line)] bg-[color:color-mix(in_srgb,var(--card)_88%,transparent)] p-7 transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 ${
+            isInView ? "animate-fade-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: `${index * 0.08}s` }}
         >
           <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-[var(--muted)]">
             0{index + 1}
           </div>
-          <h3 className="mt-6 text-[28px] font-semibold tracking-[-0.04em]">
-            {item.title}
-          </h3>
-          <p className="mt-4 text-[15px] leading-7 text-[var(--muted)]">
-            {item.text}
-          </p>
-        </motion.article>
+          <h3 className="mt-6 text-[28px] font-semibold tracking-[-0.04em]">{item.title}</h3>
+          <p className="mt-4 text-[15px] leading-7 text-[var(--muted)]">{item.text}</p>
+        </article>
       ))}
     </section>
   )

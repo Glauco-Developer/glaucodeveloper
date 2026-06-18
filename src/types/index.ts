@@ -4,6 +4,10 @@ export type Project = {
   description: string
   technologies: string[]
   demoUrl?: string
+  mentions?: Array<{
+    label: string
+    url: string
+  }>
   githubUrl?: string
   imageUrl?: string
   featured: boolean

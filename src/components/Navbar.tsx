@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { useTheme } from "./ThemeProvider"
 
@@ -53,7 +52,8 @@ export function Navbar() {
           data-interactive="true"
         >
           <span className="font-mono text-[16px] font-medium tracking-[-0.02em]">
-            glauco<span className="text-[var(--muted)]">developer</span><b className="text-violet-500 ml-0.5">_</b>
+            glauco<span className="text-[var(--muted)]">developer</span>
+            <b className="ml-0.5 text-violet-500">_</b>
           </span>
         </Link>
 
@@ -64,9 +64,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={`font-mono text-[13px] transition-colors duration-200 hover:text-[var(--nav-ink)] ${
-                    isActive(link.href)
-                      ? "text-[var(--nav-ink)]"
-                      : "text-[var(--nav-muted)]"
+                    isActive(link.href) ? "text-[var(--nav-ink)]" : "text-[var(--nav-muted)]"
                   }`}
                   data-interactive="true"
                 >
@@ -86,7 +84,7 @@ export function Navbar() {
           </button>
 
           <button
-            onClick={() => setMenuOpen((value) => !value)}
+            onClick={() => setMenuOpen((v) => !v)}
             className="text-[var(--nav-ink)] md:hidden"
             aria-label="Open menu"
             data-interactive="true"
@@ -96,36 +94,29 @@ export function Navbar() {
         </div>
       </nav>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.18 }}
-            className="border-b border-[var(--line)] bg-[color:color-mix(in_srgb,var(--bg)_88%,transparent)] p-4 backdrop-blur-2xl md:hidden"
-          >
-            <ul className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`block rounded-xl px-3 py-2 font-mono text-[13px] transition-colors duration-200 hover:text-[var(--ink)] ${
-                      isActive(link.href)
-                        ? "text-[var(--ink)]"
-                        : "text-[var(--muted)]"
-                    }`}
-                    data-interactive="true"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile menu — animado com CSS max-height */}
+      <div
+        className={`overflow-hidden border-b border-[var(--line)] bg-[color:color-mix(in_srgb,var(--bg)_88%,transparent)] backdrop-blur-2xl transition-all duration-200 ease-out md:hidden ${
+          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+        }`}
+      >
+        <ul className="flex flex-col gap-2 p-4">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`block rounded-xl px-3 py-2 font-mono text-[13px] transition-colors duration-200 hover:text-[var(--ink)] ${
+                  isActive(link.href) ? "text-[var(--ink)]" : "text-[var(--muted)]"
+                }`}
+                data-interactive="true"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   )
 }

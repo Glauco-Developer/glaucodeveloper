@@ -5,7 +5,8 @@ export default function WorkPage() {
   return (
     <div className="px-[4vw] pb-[140px] pt-[140px]">
       <div className="mx-auto max-w-[1600px]">
-        <section className="border-b border-[var(--line)] pb-16">
+
+        <section className="animate-fade-up border-b border-[var(--line)] pb-16">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[var(--muted)]">
@@ -24,9 +25,13 @@ export default function WorkPage() {
           </p>
         </section>
 
-        <section className="mt-12">
+        <section
+          className="animate-fade-up mt-12"
+          style={{ animationDelay: "0.1s" }}
+        >
           <WorkGrid projects={projects} />
         </section>
+
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 
 const stats = [
   { value: 18, suffix: "", label: "years working across web, product and digital experiences" },
@@ -10,98 +8,97 @@ const stats = [
   { value: 6, suffix: "+", label: "international recognitions — Awwwards, Spiders, CSS Awards and CommArts" },
 ]
 
-function CountUp({
-  target,
-  suffix,
-  active,
-}: {
-  target: number
-  suffix: string
-  active: boolean
-}) {
-  const count = useMotionValue(0)
-  const rounded = useTransform(count, (latest) => Math.round(latest))
+// Contador animado em JS puro — sem Framer Motion
+function CountUp({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {
   const [display, setDisplay] = useState(0)
 
   useEffect(() => {
     if (!active) return
 
-    const controls = animate(count, target, {
-      duration: 2,
-      ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier for professional feel
-      delay: 0.2,
-    })
+    const duration = 2000
+    const startTime = performance.now() + 200
+    let raf: number
 
-    return controls.stop
-  }, [active, count, target])
+    const step = (now: number) => {
+      const elapsed = now - startTime
+      if (elapsed < 0) { raf = requestAnimationFrame(step); return }
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - (1 - progress) ** 3
+      setDisplay(Math.round(eased * target))
+      if (progress < 1) raf = requestAnimationFrame(step)
+    }
 
-  // Sync motion value with React state for rendering
-  useEffect(() => {
-    return rounded.on("change", (latest) => setDisplay(latest))
-  }, [rounded])
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [active, target])
 
-  return (
-    <>
-      {display}
-      <span>{suffix}</span>
-    </>
-  )
+  return <>{display}{suffix}</>
 }
 
 export function About() {
-  const containerRef = useRef(null)
-  const titleRef = useRef(null)
-  const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
-  const statsRef = useRef(null)
-  const areStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
+  const sectionRef = useRef<HTMLElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const [isTitleInView, setIsTitleInView] = useState(false)
+  const [areStatsInView, setAreStatsInView] = useState(false)
+
+  useEffect(() => {
+    const titleEl = sectionRef.current
+    const statsEl = statsRef.current
+    if (!titleEl || !statsEl) return
+
+    const titleObserver = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setIsTitleInView(true); titleObserver.disconnect() } },
+      { rootMargin: "-100px" }
+    )
+    const statsObserver = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setAreStatsInView(true); statsObserver.disconnect() } },
+      { rootMargin: "-100px" }
+    )
+
+    titleObserver.observe(titleEl)
+    statsObserver.observe(statsEl)
+
+    return () => { titleObserver.disconnect(); statsObserver.disconnect() }
+  }, [])
 
   return (
-    <section id="about" className="px-[4vw] py-[130px]" ref={containerRef}>
+    <section id="about" ref={sectionRef} className="px-[4vw] py-[130px]">
       <div className="mx-auto max-w-[1600px]">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={isTitleInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-[46px] flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-[var(--muted)]"
+
+        <div
+          className={`mb-[46px] flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-[var(--muted)] ${
+            isTitleInView ? "animate-fade-up" : "opacity-0"
+          }`}
         >
           <span className="h-px w-8 bg-[var(--line)]" />
           <b className="font-medium text-[var(--ink)]">02</b> / About
-        </motion.div>
+        </div>
 
-        <motion.p
-          ref={titleRef}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[1050px] text-[clamp(26px,4vw,54px)] font-normal leading-[1.2] tracking-[-0.025em]"
+        <p
+          className={`max-w-[1050px] text-[clamp(26px,4vw,54px)] font-normal leading-[1.2] tracking-[-0.025em] ${
+            isTitleInView ? "animate-fade-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: "0.1s" }}
         >
           I&apos;ve been building for the web since 2008 —{" "}
           <span className="text-[var(--muted)]">
             across agency leadership, hands-on production, and senior roles on global digital products
           </span>
-          . That path gave me a broader view than just shipping code: product judgment, communication, delivery, and currently a deeper exploration into <span className="text-[var(--ink)] font-medium">Applied AI Engineering</span>.
-        </motion.p>
+          . That path gave me a broader view than just shipping code: product judgment, communication, delivery, and currently a deeper exploration into{" "}
+          <span className="font-medium text-[var(--ink)]">Applied AI Engineering</span>.
+        </p>
 
-        <div className="mt-24 space-y-12" ref={statsRef}>
+        <div ref={statsRef} className="mt-24 space-y-12">
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={stat.label}
-              initial={{ opacity: 0, y: 50 }}
-              animate={areStatsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 1.2, 
-                ease: [0.16, 1, 0.3, 1],
-                delay: 0.1 * index 
-              }}
-              className="group"
+              className={`group ${areStatsInView ? "animate-fade-up" : "opacity-0"}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="grid gap-6 border-b border-[var(--line)] pb-10 md:grid-cols-[minmax(220px,320px)_1fr] md:items-end">
                 <div className="relative">
-                  <motion.div 
-                    initial={{ width: "4rem" }}
-                    whileHover={{ width: "6rem" }}
-                    className="mb-6 h-px bg-[color:color-mix(in_srgb,var(--ink)_25%,transparent)] transition-colors duration-300 group-hover:bg-[var(--ink)]" 
-                  />
+                  {/* Linha decorativa com hover via CSS */}
+                  <div className="mb-6 h-px w-16 bg-[color:color-mix(in_srgb,var(--ink)_25%,transparent)] transition-[width,background-color] duration-300 group-hover:w-24 group-hover:bg-[var(--ink)]" />
                   <div className="mb-6 text-[clamp(64px,10vw,140px)] font-semibold leading-none tracking-[-0.07em] text-[var(--ink)]">
                     <CountUp target={stat.value} suffix={stat.suffix} active={areStatsInView} />
                   </div>
@@ -115,9 +112,10 @@ export function About() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   )

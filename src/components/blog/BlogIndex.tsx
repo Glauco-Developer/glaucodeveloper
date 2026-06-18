@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useDeferredValue, useMemo, useState, useTransition } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useMemo, useState, useTransition } from "react"
 import { Sparkles, Search, Wand2 } from "lucide-react"
 import type { BlogArticle } from "@/types"
 
@@ -15,17 +14,17 @@ export function BlogIndex({
   articles: BlogArticle[]
   categories: string[]
 }) {
+  const [inputValue, setInputValue] = useState("")
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("All")
   const [sortMode, setSortMode] = useState<SortMode>("latest")
   const [isAiMode, setIsAiMode] = useState(false)
   const [isPending, startTransition] = useTransition()
-  const deferredQuery = useDeferredValue(query)
 
   const filteredArticles = useMemo(() => {
-    if (isAiMode) return articles // In a real scenario, this would be handled by the AI logic
+    if (isAiMode) return articles
 
-    const normalizedQuery = deferredQuery.trim().toLowerCase()
+    const normalizedQuery = query.trim().toLowerCase()
     const list = articles.filter((article) => {
       const matchesCategory = category === "All" || article.category === category
       const matchesQuery =
@@ -48,7 +47,7 @@ export function BlogIndex({
 
       return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime()
     })
-  }, [articles, category, deferredQuery, sortMode, isAiMode])
+  }, [articles, category, query, sortMode, isAiMode])
 
   const featured = articles.find((article) => article.featured) ?? articles[0]
 
@@ -57,18 +56,28 @@ export function BlogIndex({
     "Frontend optimization tips",
     "DARK UI design systems",
     "Motion in product design",
-    "Interface craft techniques"
+    "Interface craft techniques",
   ]
 
   const handleSuggestionClick = (suggestion: string) => {
     startTransition(() => {
+      setInputValue(suggestion)
       setQuery(suggestion)
+    })
+  }
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    startTransition(() => {
+      setQuery(inputValue)
     })
   }
 
   return (
     <div className="mx-auto max-w-[1600px] px-[4vw] pb-[120px] pt-[140px]">
-      <section className="grid gap-10 border-b border-[var(--line)] pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+
+      {/* ── Hero header ───────────────────────────────────────────── */}
+      <section className="animate-fade-up grid gap-10 border-b border-[var(--line)] pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
           <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[var(--muted)]">
             Journal / Interface thinking
@@ -102,150 +111,151 @@ export function BlogIndex({
         </div>
       </section>
 
-      <section className="mt-12 grid gap-10 lg:grid-cols-[280px_1fr]">
+      {/* ── Sidebar + grid ────────────────────────────────────────── */}
+      <section
+        className="animate-fade-up mt-12 grid gap-10 lg:grid-cols-[280px_1fr]"
+        style={{ animationDelay: "0.1s" }}
+      >
+        {/* ── Sidebar ─────────────────────────────────────────────── */}
         <aside className="space-y-8 lg:sticky lg:top-28 lg:self-start">
+
+          {/* Search */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
                 Search
               </label>
-              
-              {/* AI Toggle Button */}
-              <button 
+
+              {/* AI Toggle */}
+              <button
                 onClick={() => setIsAiMode(!isAiMode)}
-                className={`group relative flex items-center gap-2 rounded-full px-3 py-1 transition-all duration-500 ${
-                  isAiMode 
-                  ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-[0_0_15px_rgba(124,58,237,0.4)]" 
-                  : "bg-[var(--line)]/30 text-[var(--muted)] hover:bg-[var(--line)]/50"
+                className={`relative flex items-center gap-2 rounded-full px-3 py-1 transition-all duration-500 ${
+                  isAiMode
+                    ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-[0_0_15px_rgba(124,58,237,0.4)]"
+                    : "bg-[var(--line)]/30 text-[var(--muted)] hover:bg-[var(--line)]/50"
                 }`}
               >
                 <div className="relative flex h-3 w-3 items-center justify-center">
-                  <Sparkles size={12} className={`${isAiMode ? "animate-pulse" : ""}`} />
+                  <Sparkles size={12} className={isAiMode ? "animate-pulse" : ""} />
                   {isAiMode && (
-                    <motion.div 
-                      layoutId="sparkle-glow"
-                      className="absolute inset-0 rounded-full bg-white/40 blur-[4px]"
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1.5 }}
-                      transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-                    />
+                    <span className="absolute inset-0 rounded-full bg-white/40 blur-[4px] animate-pulse" />
                   )}
                 </div>
-                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.1em]">AI Search</span>
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.1em]">
+                  AI Search
+                </span>
               </button>
             </div>
 
-            <div className={`relative overflow-hidden rounded-[18px] border transition-all duration-500 ${
-              isAiMode 
-              ? "border-violet-500/50 bg-violet-500/5 shadow-[0_0_20px_rgba(124,58,237,0.05)]" 
-              : "border-[var(--line)] bg-[color:color-mix(in_srgb,var(--card)_82%,transparent)]"
-            }`}>
-              {/* Animated Gradient Border for AI Mode */}
-              <AnimatePresence>
-                {isAiMode && (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute inset-0 -z-10 bg-gradient-to-r from-violet-500/10 via-transparent to-indigo-500/10"
-                  />
-                )}
-              </AnimatePresence>
+            <form
+              onSubmit={handleSearchSubmit}
+              className={`relative overflow-hidden rounded-[18px] border transition-all duration-500 ${
+                isAiMode
+                  ? "border-violet-500/50 bg-violet-500/5 shadow-[0_0_20px_rgba(124,58,237,0.05)]"
+                  : "border-[var(--line)] bg-[color:color-mix(in_srgb,var(--card)_82%,transparent)]"
+              }`}
+            >
+              {isAiMode && (
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-violet-500/10 via-transparent to-indigo-500/10" />
+              )}
 
               <div className="flex items-center px-4 py-3">
-                <div className={`mr-3 transition-colors duration-300 ${isAiMode ? "text-violet-500" : "text-[var(--muted)]"}`}>
+                <div
+                  className={`mr-3 transition-colors duration-300 ${
+                    isAiMode ? "text-violet-500" : "text-[var(--muted)]"
+                  }`}
+                >
                   {isAiMode ? <Wand2 size={16} /> : <Search size={16} />}
                 </div>
                 <input
-                  value={query}
-                  onChange={(event) => {
-                    const nextValue = event.target.value
-                    startTransition(() => setQuery(nextValue))
-                  }}
-                  placeholder={isAiMode ? "Ask AI anything about the blog..." : "Search title, tags or topic"}
+                  value={inputValue}
+                  onChange={(event) => setInputValue(event.target.value)}
+                  placeholder={
+                    isAiMode
+                      ? "Ask AI anything about the blog..."
+                      : "Search title, tags or topic"
+                  }
                   className="w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]/60"
                 />
-              </div>
-            </div>
-
-            {/* AI Mode Tip */}
-            <AnimatePresence>
-              {isAiMode && (
-                <motion.p 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="px-1 text-[11px] leading-relaxed text-[var(--muted)]"
+                <button
+                  type="submit"
+                  aria-label={isAiMode ? "Submit AI search" : "Submit search"}
+                  className={`ml-3 inline-flex h-9 shrink-0 items-center justify-center gap-2 px-1 transition-all duration-300 ${
+                    isAiMode
+                      ? "text-violet-400 hover:text-violet-300"
+                      : "text-[var(--muted)] hover:text-[var(--ink)]"
+                  }`}
                 >
-                  <span className="text-violet-500 font-medium italic">Tip:</span> Try searching for &quot;modern web design trends&quot; or &quot;frontend optimization tips&quot;.
-                </motion.p>
-              )}
-            </AnimatePresence>
+                  {isAiMode ? <Wand2 size={14} /> : <Search size={15} />}
+                  {isAiMode && (
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em]">
+                      Run
+                    </span>
+                  )}
+                </button>
+              </div>
+            </form>
+
+            {/* AI tip — aparece/desaparece com transição CSS */}
+            {isAiMode && (
+              <p className="px-1 text-[11px] leading-relaxed text-[var(--muted)]">
+                <span className="font-medium italic text-violet-500">Tip:</span>{" "}
+                Try searching for &quot;modern web design trends&quot; or &quot;frontend optimization tips&quot;.
+              </p>
+            )}
           </div>
 
-          <AnimatePresence mode="wait">
-            {!isAiMode ? (
-              <motion.div 
-                key="categories"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-3"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
-                  Categories
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((item) => {
-                    const active = item === category
-
-                    return (
-                      <button
-                        key={item}
-                        onClick={() => startTransition(() => setCategory(item))}
-                        className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
-                          active
-                            ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--inv-ink)]"
-                            : "border-[var(--line)] text-[var(--muted)] hover:border-[var(--ink)] hover:text-[var(--ink)]"
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    )
-                  })}
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div 
-                key="ai-suggestions"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-3"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-violet-500/80">
-                  AI Suggestions
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {aiSuggestions.map((suggestion) => (
+          {/* Categories ou AI Suggestions — troca via renderização condicional */}
+          {!isAiMode ? (
+            <div className="space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
+                Categories
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((item) => {
+                  const active = item === category
+                  return (
                     <button
-                      key={suggestion}
-                      onClick={() => handleSuggestionClick(suggestion)}
-                      className="group relative flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-2 text-left transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10"
+                      key={item}
+                      onClick={() => startTransition(() => setCategory(item))}
+                      className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
+                        active
+                          ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--inv-ink)]"
+                          : "border-[var(--line)] text-[var(--muted)] hover:border-[var(--ink)] hover:text-[var(--ink)]"
+                      }`}
                     >
-                      <Sparkles size={10} className="text-violet-500 opacity-50 group-hover:opacity-100" />
-                      <span className="font-mono text-[11px] tracking-tight text-[var(--muted)] group-hover:text-violet-400">
-                        {suggestion}
-                      </span>
+                      {item}
                     </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  )
+                })}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-violet-500/80">
+                AI Suggestions
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {aiSuggestions.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                    className="group flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-2 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10"
+                  >
+                    <Sparkles
+                      size={10}
+                      className="text-violet-500 opacity-50 group-hover:opacity-100"
+                    />
+                    <span className="font-mono text-[11px] tracking-tight text-[var(--muted)] group-hover:text-violet-400">
+                      {suggestion}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
+          {/* Sort */}
           <div className="space-y-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
               Sort
@@ -257,11 +267,12 @@ export function BlogIndex({
                 { key: "title", label: "A–Z" },
               ].map((item) => {
                 const active = item.key === sortMode
-
                 return (
                   <button
                     key={item.key}
-                    onClick={() => startTransition(() => setSortMode(item.key as SortMode))}
+                    onClick={() =>
+                      startTransition(() => setSortMode(item.key as SortMode))
+                    }
                     className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
                       active
                         ? "border-[var(--ink)] text-[var(--ink)]"
@@ -276,6 +287,7 @@ export function BlogIndex({
           </div>
         </aside>
 
+        {/* ── Article grid ────────────────────────────────────────── */}
         <div>
           <div className="mb-8 flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
@@ -288,45 +300,46 @@ export function BlogIndex({
 
           <div className="grid gap-6 xl:grid-cols-2">
             {filteredArticles.map((article) => (
-              <Link
-                key={article.id}
-                href={article.href}
-                className="group relative"
-              >
-                <div className={`relative h-full overflow-hidden rounded-[22px] border p-6 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] ${
-                  isAiMode 
-                  ? "border-violet-500/20 bg-[#0a0a0c] hover:border-violet-500/50 shadow-[inset_0_0_20px_rgba(124,58,237,0.02)]" 
-                  : "border-[var(--line)] bg-[var(--card)] hover:border-[var(--ink)]"
-                }`}>
-                  {/* Elegant Gradient Sweep on Hover */}
-                  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent translate-x-[-100%] transition-transform duration-1000 ease-in-out group-hover:translate-x-[100%]" />
+              <Link key={article.id} href={article.href} className="group relative">
+                <div
+                  className={`relative h-full overflow-hidden rounded-[22px] border p-6 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] ${
+                    isAiMode
+                      ? "border-violet-500/20 bg-[#0a0a0c] hover:border-violet-500/50 shadow-[inset_0_0_20px_rgba(124,58,237,0.02)]"
+                      : "border-[var(--line)] bg-[var(--card)] hover:border-[var(--ink)]"
+                  }`}
+                >
+                  {/* Sweep on hover */}
+                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
                   </div>
 
-                  <div className="relative z-10 flex flex-col h-full">
+                  <div className="relative z-10 flex h-full flex-col">
+                    {/* Cover com zoom via CSS */}
                     <div className="overflow-hidden rounded-[18px]">
-                      <motion.div
-                        className="h-48"
+                      <div
+                        className="h-48 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
                         style={{ background: article.coverTone }}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       />
                     </div>
-                    
+
                     <div className="mt-5 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
                       <span>{article.category}</span>
                       <span>{article.publishedAt}</span>
                     </div>
 
-                    <h2 className={`mt-4 text-[30px] font-semibold leading-[1.04] tracking-[-0.04em] transition-all duration-500 group-hover:translate-x-1 ${
-                      isAiMode ? "text-white group-hover:text-white" : "text-[var(--ink)]"
-                    }`}>
+                    <h2
+                      className={`mt-4 text-[30px] font-semibold leading-[1.04] tracking-[-0.04em] transition-all duration-500 group-hover:translate-x-1 ${
+                        isAiMode ? "text-white" : "text-[var(--ink)]"
+                      }`}
+                    >
                       {article.title}
                     </h2>
-                    
-                    <p className={`mt-4 flex-1 text-[15px] leading-7 transition-colors duration-500 ${
-                      isAiMode ? "text-zinc-400" : "text-[var(--muted)]"
-                    }`}>
+
+                    <p
+                      className={`mt-4 flex-1 text-[15px] leading-7 transition-colors duration-500 ${
+                        isAiMode ? "text-zinc-400" : "text-[var(--muted)]"
+                      }`}
+                    >
                       {article.excerpt}
                     </p>
 
@@ -335,9 +348,9 @@ export function BlogIndex({
                         <span
                           key={tag}
                           className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-all duration-500 ${
-                            isAiMode 
-                            ? "border-violet-500/20 text-zinc-500 group-hover:border-violet-500/40 group-hover:text-violet-400" 
-                            : "border-[var(--line)] text-[var(--muted)] group-hover:border-[var(--ink)] group-hover:text-[var(--ink)]"
+                            isAiMode
+                              ? "border-violet-500/20 text-zinc-500 group-hover:border-violet-500/40 group-hover:text-violet-400"
+                              : "border-[var(--line)] text-[var(--muted)] group-hover:border-[var(--ink)] group-hover:text-[var(--ink)]"
                           }`}
                         >
                           {tag}
@@ -354,4 +367,3 @@ export function BlogIndex({
     </div>
   )
 }
-

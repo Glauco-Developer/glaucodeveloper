@@ -1,49 +1,64 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 
 export function CallToAction() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
+  const ref = useRef<HTMLElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "-80px" }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section id="contact" className="px-[4vw] pb-[110px] pt-[150px] text-center">
+    <section id="contact" ref={ref} className="px-[4vw] pb-[110px] pt-[150px] text-center">
       <div className="mx-auto max-w-[1600px]">
         <div className="mb-[46px] flex items-center justify-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-[var(--muted)]">
           <span className="h-px w-8 bg-[var(--line)]" />
           <b className="font-medium text-[var(--ink)]">05</b> / Contact
         </div>
 
-        <motion.h2
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10 text-[clamp(36px,7vw,110px)] font-semibold leading-none tracking-[-0.04em]"
+        <h2
+          className={`mb-10 text-[clamp(36px,7vw,110px)] font-semibold leading-none tracking-[-0.04em] ${
+            isInView ? "animate-fade-up" : "opacity-0"
+          }`}
         >
-          Open for
+          Reach out
           <br />
-          conversation.
-        </motion.h2>
+          if relevant.
+        </h2>
 
-        <motion.a
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        <a
           href="mailto:glauco.developer@gmail.com"
-          className="cta-shape cta-shape-ghost inline-flex items-center justify-center rounded-[40px] px-8 py-5 font-mono text-[clamp(16px,2.4vw,22px)] text-[var(--ink)]"
+          className={`cta-shape cta-shape-ghost inline-flex items-center justify-center rounded-[40px] px-8 py-5 font-mono text-[clamp(16px,2.4vw,22px)] text-[var(--ink)] ${
+            isInView ? "animate-fade-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: "0.2s" }}
           data-interactive="true"
         >
           <span className="cta-shape-fill" />
           <span className="relative z-[1]">glauco.developer@gmail.com</span>
-        </motion.a>
+        </a>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-[60px] flex flex-wrap justify-center gap-8"
+        <div
+          className={`mt-[60px] flex flex-wrap justify-center gap-8 ${
+            isInView ? "animate-fade-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: "0.4s" }}
         >
           {["GitHub", "LinkedIn", "Resume ↗"].map((label) => (
             <a
@@ -55,7 +70,7 @@ export function CallToAction() {
               {label}
             </a>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
