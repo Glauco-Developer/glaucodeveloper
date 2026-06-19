@@ -1,16 +1,15 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getBlogArticleBySlug, blogArticles } from "@/data/blog"
+import { formatBlogDate } from "@/lib/blog"
+import { getPostBySlug } from "@/lib/supabase/queries"
 import type { BlogArticle } from "@/types"
-
-export function generateStaticParams() {
-  return blogArticles.map((article) => ({ slug: article.slug }))
-}
 
 function wordCount(article: BlogArticle) {
   const text = [article.intro, ...article.sections.flatMap((s) => s.body)].join(" ")
   return Math.ceil(text.split(/\s+/).length / 10) * 10
 }
+
+export const dynamic = "force-dynamic"
 
 export default async function BlogArticlePage({
   params,
@@ -18,7 +17,7 @@ export default async function BlogArticlePage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const article = getBlogArticleBySlug(slug)
+  const article = await getPostBySlug(slug)
   if (!article) notFound()
 
   const words = wordCount(article)
@@ -36,7 +35,7 @@ export default async function BlogArticlePage({
             ← All Posts / {article.category}
           </Link>
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
-            {article.publishedAt} / {article.readTime} / {words} words
+            {formatBlogDate(article.publishedAt)} / {article.readTime} / {words} words
           </span>
         </div>
 

@@ -26,14 +26,16 @@ export function Navbar() {
   }
 
   useEffect(() => {
+    const threshold = pathname === "/" ? Math.max(window.innerHeight - 100, 120) : 24
+
     function onScroll() {
-      setScrolled(window.scrollY > Math.max(window.innerHeight - 100, 120))
+      setScrolled(window.scrollY > threshold)
     }
 
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [pathname])
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">

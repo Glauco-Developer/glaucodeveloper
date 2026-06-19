@@ -23,7 +23,7 @@ export async function sendMagicLink(
     return { error: "Esse email nao tem acesso ao admin." }
   }
 
-  const supabase = await createClient()
+  const supabase = await createClient({ writeCookies: true })
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
@@ -42,7 +42,7 @@ export async function sendMagicLink(
 }
 
 export async function signOut() {
-  const supabase = await createClient()
+  const supabase = await createClient({ writeCookies: true })
   await supabase.auth.signOut()
   redirect("/admin/login")
 }

@@ -23,21 +23,63 @@ export type Technology = {
   level: "expert" | "advanced" | "intermediate"
 }
 
+export type BlogSection = {
+  title: string
+  body: string[]
+}
+
+export type BlogCategoryRow = {
+  id: string
+  slug: string
+  name: string
+  created_at: string
+}
+
+export type BlogCategory = {
+  id: string
+  slug: string
+  name: string
+  createdAt: string
+}
+
+export type BlogPostRow = {
+  id: string
+  slug: string
+  title: string
+  excerpt: string
+  intro: string
+  category_id: string | null
+  tags: string[]
+  cover_tone: string
+  sections: BlogSection[]
+  content_text: string
+  read_time: string
+  featured: boolean
+  published: boolean
+  published_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type BlogPostRowWithCategory = BlogPostRow & {
+  blog_categories: Pick<BlogCategoryRow, "id" | "slug" | "name"> | null
+}
+
 export type BlogArticle = {
   id: string
   slug: string
   title: string
   excerpt: string
   category: string
+  categoryId: string | null
+  categorySlug: string
   readTime: string
-  publishedAt: string
+  publishedAt: string | null
   featured: boolean
+  published: boolean
   coverTone: string
   tags: string[]
   intro: string
-  sections: Array<{
-    title: string
-    body: string[]
-  }>
+  sections: BlogSection[]
   href: string
 }

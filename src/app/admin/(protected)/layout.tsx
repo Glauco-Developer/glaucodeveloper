@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation"
 import { signOut } from "../actions"
 import { AdminSetupNotice } from "@/components/admin/AdminSetupNotice"
-import { getMissingAdminAuthEnv, isAdminEmail } from "@/lib/supabase/env"
-import { createClient } from "@/lib/supabase/server"
+import { getMissingAdminAuthEnv } from "@/lib/supabase/env"
+import { getAdminPageClient } from "@/lib/supabase/admin"
 
 export default async function AdminProtectedLayout({
   children,
@@ -15,19 +14,7 @@ export default async function AdminProtectedLayout({
     return <AdminSetupNotice missingEnv={missingEnv} />
   }
 
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect("/admin/login")
-  }
-
-  if (!isAdminEmail(user.email)) {
-    await supabase.auth.signOut()
-    redirect("/admin/login?error=Esse+usuario+nao+tem+acesso")
-  }
+  const { user } = await getAdminPageClient()
 
   return (
     <div className="px-4 pb-16 pt-28">

@@ -1,9 +1,32 @@
-"use client"
-
 import Link from "next/link"
-import { blogArticles } from "@/data/blog"
+import type { BlogArticle } from "@/types"
+import { formatBlogDate } from "@/lib/blog"
 
-export function Blog() {
+export function Blog({ posts }: { posts: BlogArticle[] }) {
+  if (posts.length === 0) {
+    return (
+      <section id="blog" className="px-[4vw] py-[130px]">
+        <div className="mx-auto max-w-[1600px]">
+          <div className="animate-fade-up mb-10 flex flex-wrap items-end justify-between gap-[18px]">
+            <h2 className="text-[clamp(34px,5.5vw,72px)] font-semibold leading-[0.95] tracking-[-0.03em]">
+              Writing on interface craft
+            </h2>
+            <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-(--muted)">
+              <b className="font-medium text-(--ink)">04</b> / Blog
+            </div>
+          </div>
+
+          <div className="rounded-[24px] border border-(--line) bg-[color-mix(in_srgb,var(--card)_88%,transparent)] px-8 py-12 text-center">
+            <p className="text-[15px] text-(--muted)">
+              Nenhum post publicado ainda. Quando voce publicar o primeiro no admin,
+              ele aparece aqui.
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section id="blog" className="px-[4vw] py-[130px]">
       <div className="mx-auto max-w-[1600px]">
@@ -18,7 +41,7 @@ export function Blog() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {blogArticles.map((article, index) => (
+          {posts.map((article, index) => (
             <Link
               key={article.id}
               href={article.href}
@@ -50,7 +73,7 @@ export function Blog() {
 
                   <div className="mt-6 flex items-center justify-between border-t border-(--line) pt-5">
                     <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-(--muted)">
-                      {article.publishedAt}
+                      {formatBlogDate(article.publishedAt)}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-(--line) px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-(--muted) transition-[background-color,color,border-color] duration-300 group-hover:border-(--ink) group-hover:bg-(--ink) group-hover:text-(--inv-ink)">
                       Read

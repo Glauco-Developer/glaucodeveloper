@@ -9,8 +9,11 @@ import { Technologies } from "@/components/home/Technologies"
 import { Blog } from "@/components/home/Blog"
 import { About } from "@/components/home/About"
 import { CallToAction } from "@/components/home/CallToAction"
+import { getHomePosts } from "@/lib/supabase/queries"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await getHomePosts()
+
   return (
     <>
       <HomeChrome />
@@ -19,7 +22,7 @@ export default function HomePage() {
         <Technologies />
         <About />
         <Projects />
-        <Blog />
+        <Blog posts={posts} />
         <CallToAction />
       </div>
     </>

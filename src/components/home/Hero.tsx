@@ -44,7 +44,7 @@ export function Hero() {
 
           <h1 className="text-[clamp(38px,6.2vw,92px)] font-semibold leading-[0.94] tracking-[-0.05em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
             <span className="block">
-              18 years online,
+              Built for the web,
             </span>
             <span className="block font-light text-white/55">
               global work,

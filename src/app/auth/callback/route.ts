@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     )
   }
 
-  const supabase = await createClient()
+  const supabase = await createClient({ writeCookies: true })
   const { error } = await supabase.auth.exchangeCodeForSession(code)
 
   if (error) {

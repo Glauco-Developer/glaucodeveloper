@@ -2,20 +2,29 @@ import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 import { getSupabaseEnv } from "./env"
 
-export async function createClient() {
+type CreateClientOptions = {
+  writeCookies?: boolean
+}
+
+export async function createClient(options: CreateClientOptions = {}) {
   const cookieStore = await cookies()
   const { url, anonKey } = getSupabaseEnv()
+  const { writeCookies = false } = options
 
   return createServerClient(url, anonKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll()
       },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set(name, value, options)
-        })
-      },
+      ...(writeCookies
+        ? {
+            setAll(cookiesToSet) {
+              cookiesToSet.forEach(({ name, value, options }) => {
+                cookieStore.set(name, value, options)
+              })
+            },
+          }
+        : {}),
     },
   })
 }

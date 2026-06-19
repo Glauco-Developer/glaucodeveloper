@@ -1,6 +1,13 @@
 import { BlogIndex } from "@/components/blog/BlogIndex"
-import { blogArticles, blogCategories } from "@/data/blog"
+import { getPublishedCategories, getPublishedPosts } from "@/lib/supabase/queries"
 
-export default function BlogPage() {
-  return <BlogIndex articles={blogArticles} categories={blogCategories} />
+export const dynamic = "force-dynamic"
+
+export default async function BlogPage() {
+  const [articles, categories] = await Promise.all([
+    getPublishedPosts(),
+    getPublishedCategories(),
+  ])
+
+  return <BlogIndex articles={articles} categories={categories} />
 }

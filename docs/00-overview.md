@@ -2,7 +2,7 @@
 
 ## O que vamos construir
 
-Transformar o blog estático atual (dados em `src/data/blog.ts`) em um sistema completo com:
+Transformar o blog em um sistema completo com:
 
 - **Banco de dados** no Supabase (PostgreSQL gerenciado)
 - **Área de admin** protegida por login para criar/editar/remover posts
@@ -19,9 +19,9 @@ Transformar o blog estático atual (dados em `src/data/blog.ts`) em um sistema c
 | # | Fase | O que entrega |
 |---|------|---------------|
 | 1 | [Setup do Supabase](./01-supabase-setup.md) | Projeto criado, SDK instalado, env vars configuradas |
-| 2 | [Schema do banco](./02-database-schema.md) | Tabelas, RLS, tipos TypeScript atualizados |
+| 2 | [Schema do banco](./02-database-schema.md) | Tabelas de categorias e posts, RLS e tipos |
 | 3 | [Autenticação](./03-authentication.md) | Magic Link, callback, logout e rota `/admin` protegida |
-| 4 | [Admin CMS](./04-admin-cms.md) | CRUD de posts na área admin |
+| 4 | [Admin CMS](./04-admin-cms.md) | CRUD simples de categorias e posts |
 | 5 | [Editor rico](./05-rich-text-editor.md) | Tiptap integrado ao admin, conteúdo em HTML/JSON |
 | 6 | [Blog dinâmico](./06-dynamic-blog.md) | Páginas lendo do banco, ISR, slug dinâmico |
 | 7 | [Busca, filtros e IA](./07-search-and-ai.md) | Full-text search, pgvector, AI search com embeddings |
@@ -79,8 +79,13 @@ src/
 **Por que Supabase Auth e não NextAuth?**
 Supabase Auth é nativo ao banco e conversa direto com RLS. Para este projeto, o caminho mais simples é usar Magic Link para um único admin, sem senha local para gerenciar.
 
-**Por que Tiptap e não uma solução de Markdown?**
-O layout atual do artigo (`sections[]`) é estruturado. O Tiptap permite salvar JSON (ProseMirror) ou HTML, preservando títulos, blockquotes e parágrafos como o design pede, sem parsing customizado de Markdown.
+**Por que não usar um editor rico agora?**
+Como o foco aqui é aprender Next.js e fechar um CRUD funcional primeiro, o conteúdo do post continua em um formato simples e explícito:
+
+- `intro`
+- `sections[]`
+
+Isso reduz complexidade sem perder a estrutura do layout atual do blog.
 
 **Por que pgvector para AI Search e não serviço externo?**
 O Supabase já oferece a extensão `pgvector` gratuitamente. Os embeddings ficam no mesmo banco, a busca semântica vira uma query SQL, e não precisamos de infra extra.

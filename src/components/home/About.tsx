@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from "react"
 
 const stats = [
-  { value: 18, suffix: "", label: "years working across web, product and digital experiences" },
   { value: 5, suffix: "", label: "years leading an agency across delivery, clients and operations" },
   { value: 6, suffix: "+", label: "international recognitions — Awwwards, Spiders, CSS Awards and CommArts" },
 ]
@@ -80,7 +79,7 @@ export function About() {
           }`}
           style={{ animationDelay: "0.1s" }}
         >
-          I&apos;ve been building for the web since 2008 —{" "}
+          I&apos;ve built my career across the web —{" "}
           <span className="text-[var(--muted)]">
             across agency leadership, hands-on production, and senior roles on global digital products
           </span>
