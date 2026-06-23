@@ -5,9 +5,9 @@ import { AboutTimeline, AboutPrinciples } from "@/components/about/AboutExperien
 import { AboutAwards } from "@/components/about/AboutAwards"
 
 const stats = [
-  { value: 5, suffix: "+", label: "Years of craft" },
+  { value: 12, suffix: "+", label: "Years of craft" },
   { value: 30, suffix: "+", label: "Projects shipped" },
-  { value: 12, suffix: "", label: "Clients served" },
+  { value: 6, suffix: "", label: "Countries reached through projects" },
   { value: 100, suffix: "%", label: "Remote" },
 ]
 
@@ -53,12 +53,12 @@ export default function AboutPage() {
           </div>
 
           <h1 className="mt-8 text-[clamp(46px,7.5vw,120px)] font-semibold leading-[0.92] tracking-[-0.06em]">
-            Front-end shaped<br />like product work.
+            Twelve years of<br />front-end work.
           </h1>
 
           <p className="mt-8 max-w-[52ch] text-[18px] leading-[1.7] text-[var(--muted)]">
-            I work at the intersection of interface, product thinking and delivery
-            discipline, with attention to motion, clarity and long-term structure.
+            I care about clean interfaces, product thinking, and code that
+            still makes sense a year later.
           </p>
         </section>
 

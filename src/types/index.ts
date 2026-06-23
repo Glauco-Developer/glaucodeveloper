@@ -4,6 +4,7 @@ export type Project = {
   description: string
   technologies: string[]
   demoUrl?: string
+  year?: string
   mentions?: Array<{
     label: string
     url: string

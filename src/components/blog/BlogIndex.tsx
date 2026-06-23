@@ -494,8 +494,8 @@ export function BlogIndex({
                     </p>
                   )}
 
-                  {aiArticles && aiArticles.length > 0 && (
-                    <div className="mt-6 border-t border-violet-500/10 pt-5">
+                  {!isAiStreaming && aiArticles && aiArticles.length > 0 && (
+                    <div className="animate-fade-in-up mt-6 border-t border-violet-500/10 pt-5">
                       <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
                         Sources
                       </p>

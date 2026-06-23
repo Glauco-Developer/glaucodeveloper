@@ -3,8 +3,8 @@
 import { useRef, useState, useEffect } from "react"
 
 const stats = [
-  { value: 5, suffix: "", label: "years leading an agency across delivery, clients and operations" },
-  { value: 6, suffix: "+", label: "international recognitions — Awwwards, Spiders, CSS Awards and CommArts" },
+  { value: 12, suffix: "+", label: "years of experience across studios and product teams" },
+  { value: 8, suffix: "+", label: "international recognitions tied to projects I've contributed to" },
 ]
 
 // Contador animado em JS puro — sem Framer Motion
@@ -79,12 +79,13 @@ export function About() {
           }`}
           style={{ animationDelay: "0.1s" }}
         >
-          I&apos;ve built my career across the web —{" "}
+          I&apos;ve spent the last twelve years building on the web —{" "}
           <span className="text-[var(--muted)]">
-            across agency leadership, hands-on production, and senior roles on global digital products
+            across studios and international teams, shipping production work end to end
           </span>
-          . That path gave me a broader view than just shipping code: product judgment, communication, delivery, and currently a deeper exploration into{" "}
-          <span className="font-medium text-[var(--ink)]">Applied AI Engineering</span>.
+          . That gave me more than code: product judgment, communication, and the discipline of delivery. Lately I&apos;m digging into{" "}
+          <span className="font-medium text-[var(--ink)]">React, Next.js</span>{" "}
+          and AI-powered applications.
         </p>
 
         <div ref={statsRef} className="mt-24 space-y-12">

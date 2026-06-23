@@ -30,9 +30,11 @@ export function WorkGrid({ projects }: WorkGridProps) {
                       : "linear-gradient(135deg,#fafafa,#bdbdbd 55%,#7a7a7a)",
                 }}
               />
-              <span className="absolute left-[14px] top-[14px] rounded-[20px] border border-[var(--line)] bg-[var(--bg)] px-[11px] py-[5px] font-mono text-[11px] transition-colors duration-300">
-                {index === 0 ? "2026 — Current" : `202${index + 3}`}
-              </span>
+              {project.year ? (
+                <span className="absolute left-[14px] top-[14px] rounded-[20px] border border-[var(--line)] bg-[var(--bg)] px-[11px] py-[5px] font-mono text-[11px] transition-colors duration-300">
+                  {project.year}
+                </span>
+              ) : null}
             </div>
 
             <div className="p-[26px]">

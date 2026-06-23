@@ -5,10 +5,10 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { useTheme } from "./ThemeProvider"
+import { GithubIcon, LinkedinIcon } from "./icons"
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -75,6 +75,25 @@ export function Navbar() {
               </li>
             ))}
           </ul>
+
+          <div className="hidden items-center gap-5 text-[var(--nav-ink)] md:flex">
+            <a
+              href="#"
+              aria-label="GitHub"
+              className="opacity-80 transition-opacity hover:opacity-100"
+              data-interactive="true"
+            >
+              <GithubIcon size={18} />
+            </a>
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="opacity-80 transition-opacity hover:opacity-100"
+              data-interactive="true"
+            >
+              <LinkedinIcon size={18} />
+            </a>
+          </div>
 
           <button
             onClick={toggleTheme}

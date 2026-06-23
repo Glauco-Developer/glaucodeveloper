@@ -3,9 +3,9 @@ import { ContactForm } from "@/components/contact/ContactForm"
 
 const focusAreas = [
   "Interface systems and front-end craft",
-  "Applied AI exploration",
+  "Exploring AI-powered applications",
   "Product-minded execution",
-  "Digital work shaped by international teams",
+  "Experience working with international teams",
 ]
 
 const markets = ["Ireland", "United Kingdom", "Belgium", "Switzerland", "United States", "Brazil"]
@@ -22,7 +22,7 @@ export default function ContactPage() {
           </p>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
             <h1 className="max-w-[14ch] text-[clamp(40px,6vw,96px)] font-semibold leading-[0.93] tracking-tighter">
-              A direct line to the person behind the work.
+              Say hello — I read every message myself.
             </h1>
           </div>
         </div>

@@ -19,19 +19,34 @@ const principles = [
 
 const timeline = [
   {
-    year: "2018—2026",
-    title: "Senior Engineer at Ebow Digital",
-    text: "Led front-end development for major projects in Ireland, including The Spider Awards and content featured in The Guardian and NYT.",
+    year: "Jul 2018 — Present",
+    title: "Web Developer at Ebow Digital",
+    location: "County Dublin, Ireland",
+    text: "Contributed front-end development for Irish digital projects, including the Virtual Record Treasury of Ireland — work later featured in The New York Times and The Guardian.",
   },
   {
-    year: "2017—2018",
+    year: "May 2017 — Mar 2018",
     title: "Front-end Developer at Perverte",
+    location: "Porto Alegre, Brazil",
     text: "Developed award-winning immersive experiences, including Benoît Nihant, recognized by Awwwards and Communication Arts.",
   },
   {
-    year: "2008—2013",
-    title: "Founder at Simbweb",
-    text: "My early years were shaped by running a digital agency, balancing delivery, client relationships, process and the day-to-day reality of building digital work.",
+    year: "Sep 2016 — Dec 2017",
+    title: "Front-end Developer at Ideia Agência Digital",
+    location: "Porto Alegre, Brazil",
+    text: "Built and maintained client websites at a digital agency.",
+  },
+  {
+    year: "Mar 2014 — Aug 2015",
+    title: "Front-end Developer at Segundo Andar",
+    location: "Porto Alegre, Brazil",
+    text: "Front-end development work early in my career.",
+  },
+  {
+    year: "Jul 2008 — Dec 2013",
+    title: "Front-end Developer (Founder) at Simbweb",
+    location: "Porto Alegre, Brazil",
+    text: "Founded and built websites end to end for local clients.",
   },
 ]
 
@@ -84,6 +99,7 @@ export function AboutTimeline() {
             </div>
             <div>
               <h3 className="text-[24px] font-semibold tracking-[-0.03em]">{item.title}</h3>
+              <p className="mt-1 font-mono text-[12px] text-[var(--muted)]">{item.location}</p>
               <p className="mt-3 max-w-[44ch] text-[15px] leading-7 text-[var(--muted)]">
                 {item.text}
               </p>

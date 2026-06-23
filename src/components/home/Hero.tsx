@@ -35,32 +35,32 @@ export function Hero() {
       <div className="relative z-[3] mx-auto w-full max-w-[1600px]">
         <div className="max-w-[680px] text-white">
           <div
-            className="mb-[26px] inline-flex items-center gap-[9px] rounded-[30px] border border-white/25 bg-black/30 px-4 py-2 font-mono text-xs text-zinc-100 backdrop-blur-[6px]"
+            className="mb-[26px] hidden items-center gap-[9px] rounded-[30px] border border-white/25 bg-black/30 px-4 py-2 font-mono text-xs text-zinc-100 backdrop-blur-[6px] sm:inline-flex"
             data-interactive="true"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-white" />
-            Full-Stack Engineer · Applied AI Engineering
+            Front-end Developer · Remote
           </div>
 
           <h1 className="text-[clamp(38px,6.2vw,92px)] font-semibold leading-[0.94] tracking-[-0.05em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
             <span className="block">
-              Built for the web,
+              Hi, I&apos;m Glauco.
             </span>
             <span className="block font-light text-white/55">
-              global work,
+              I build things
             </span>
             <span className="block">
-              sharp eye.
+              for the web.
             </span>
           </h1>
 
           <p className="mt-[22px] max-w-[520px] text-[15px] leading-[1.75] text-white/72 sm:text-[16px]">
-            A digital professional shaped by <b className="font-semibold text-white">international product teams</b>, creative studios and years running his own agency — with a strong eye for interfaces and a current focus on <b className="font-semibold text-white">Applied AI Engineering</b>.
+            A front-end developer with 12+ years of experience across <b className="font-semibold text-white">Brazilian studios</b> and <b className="font-semibold text-white">international teams in Ireland</b>. Currently building with WordPress, JavaScript, React, Next.js and AI integrations.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
             <Link
-              href="/work"
+              href="#work"
               className="cta-shape cta-shape-light inline-flex items-center gap-2 rounded-[40px] px-6 py-3.5 font-mono text-[13px] font-medium text-black"
               data-interactive="true"
             >

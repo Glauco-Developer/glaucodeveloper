@@ -23,9 +23,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "Glauco Developer — Front-end Engineer",
+  title: "Glauco Russo — Front-end Developer",
   description:
-    "Portfolio for Glauco Developer, focused on premium front-end interfaces with React, Next.js and TypeScript.",
+    "Personal portfolio of Glauco Russo, a Brazilian front-end developer building with React, Next.js and TypeScript, and exploring AI-powered applications.",
 }
 
 export default function RootLayout({

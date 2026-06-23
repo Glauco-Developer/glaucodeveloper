@@ -3,58 +3,49 @@ import type { Project } from "@/types"
 export const projects: Project[] = [
   {
     id: "1",
+    title: "AllDash AI",
+    description:
+      "A WordPress plugin I built that uses AI to monitor and manage client site portfolios — real-time health checks, automated diagnostics on error logs, and weekly reports for agencies running multiple WordPress sites.",
+    technologies: ["WordPress", "PHP", "JavaScript", "AI APIs"],
+    demoUrl: "https://alldashai.com",
+    featured: true,
+    category: "personal",
+    role: "Creator",
+    year: "2025 — Current",
+  },
+  {
+    id: "2",
     title: "Benoît Nihant Chocolatier",
     description:
-      "Creative website for an award-winning Belgian chocolatier. Winner of Awwwards Honorable Mention and Communication Arts Webpick of the Day. Immersive storytelling and rich visual layers.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Craft CMS"],
+      "Creative website for an award-winning Belgian chocolatier, built on Angular with a headless CMS. Immersive storytelling and rich visual layers earned recognition from Awwwards, CSS Design Awards and Communication Arts.",
+    technologies: ["Angular", "Headless CMS", "GSAP", "JavaScript"],
     demoUrl: "https://www.benoitnihant.be",
     mentions: [
       { label: "Awwwards", url: "https://www.awwwards.com/" },
+      { label: "CSS Design Awards", url: "https://www.cssdesignawards.com/" },
       { label: "Communication Arts", url: "https://www.commarts.com/" },
     ],
     featured: true,
     category: "frontend",
     agency: "Perverte",
     role: "Front-end Developer",
+    year: "2018",
   },
   {
-    id: "2",
-    title: "The Spider Awards",
+    id: "3",
+    title: "Virtual Treasury — Portals",
     description:
-      "Platform for Ireland's premier digital awards. Contributed to the development of the 'Digital for Good' award-winning environment. Focused on accessibility and performance.",
-    technologies: ["TypeScript", "JavaScript", "WordPress", "CI/CD"],
-    demoUrl: "https://www.spiderawards.com",
+      "Contributed front-end development, built on Angular with a headless CMS, to the Portals section of the Virtual Record Treasury of Ireland — a Trinity College Dublin-led project digitally reconstructing archives destroyed in the 1922 Public Record Office fire. The project was later featured in The New York Times and The Guardian.",
+    technologies: ["Angular", "Headless CMS", "TypeScript", "JavaScript"],
+    demoUrl: "https://virtualtreasury.ie/portals",
     mentions: [
-      { label: "Spider Awards", url: "https://www.spiderawards.com" },
+      { label: "The New York Times", url: "https://virtualtreasury.ie/news/vrti-featured-in-nytimes-article" },
+      { label: "The Guardian", url: "https://www.theguardian.com/world/2025/jun/30/pioneering-project-releases-more-lost-irish-records-spanning-700-years" },
     ],
     featured: true,
     category: "frontend",
     agency: "Ebow Digital",
     role: "Web Developer",
-  },
-  {
-    id: "3",
-    title: "The New York Times / The Guardian",
-    description:
-      "Contributed to high-impact interactive work featured in globally recognized publications, with attention to scalable front-end architecture and semantic structure.",
-    technologies: ["HTML5", "SCSS", "JavaScript", "REST APIs"],
-    mentions: [
-      { label: "The New York Times", url: "https://www.nytimes.com" },
-      { label: "The Guardian", url: "https://www.theguardian.com" },
-    ],
-    featured: true,
-    category: "frontend",
-    agency: "Ebow Digital",
-    role: "Senior Engineer",
-  },
-  {
-    id: "4",
-    title: "Simbweb",
-    description:
-      "Founded and led a digital agency for over 5 years. That period built a broader foundation in delivery, client relationships, operations and digital execution.",
-    technologies: ["PHP", "JavaScript", "jQuery", "MySQL"],
-    featured: true,
-    category: "personal",
-    role: "Founder",
+    year: "2022 — Current",
   },
 ]
