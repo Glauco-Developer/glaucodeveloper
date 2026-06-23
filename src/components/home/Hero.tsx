@@ -44,18 +44,15 @@ export function Hero() {
 
           <h1 className="text-[clamp(38px,6.2vw,92px)] font-semibold leading-[0.94] tracking-[-0.05em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.5)]">
             <span className="block">
-              Hi, I&apos;m Glauco.
+            Web development
             </span>
             <span className="block font-light text-white/55">
-              I build things
-            </span>
-            <span className="block">
-              for the web.
+            and software engineering.
             </span>
           </h1>
 
           <p className="mt-[22px] max-w-[520px] text-[15px] leading-[1.75] text-white/72 sm:text-[16px]">
-            A front-end developer with 12+ years of experience across <b className="font-semibold text-white">Brazilian studios</b> and <b className="font-semibold text-white">international teams in Ireland</b>. Currently building with WordPress, JavaScript, React, Next.js and AI integrations.
+            I'm Glauco Russo, a web developer with 12+ years of experience in the industry. My work focuses on developing functional web platforms, combining clean code with modern backend integrations and practical AI features.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">

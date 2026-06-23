@@ -21,8 +21,8 @@ function buildMessages(question: string, articles: BlogArticle[]) {
       role: "system",
       content:
         "You answer questions about a personal blog using only the full post content given to you below. " +
-        "Be thorough and helpful (a short paragraph or two, with specifics from the posts), refer to posts by title, " +
-        "and never invent information that isn't in the content. If the content doesn't answer the question, say so honestly. " +
+        "Be concise and direct — 2 to 3 sentences at most, with specifics from the posts, referring to posts by title, " +
+        "and never invent information that isn't in the content. If the content doesn't answer the question, say so honestly in one sentence. " +
         "Reply in plain prose with no markdown formatting at all — no asterisks, no bold, no bullet lists, no headers.",
     },
     {
@@ -52,6 +52,7 @@ export async function generateAnswer(
       body: JSON.stringify({
         model: OPENAI_CHAT_MODEL,
         temperature: 0.3,
+        max_tokens: 220,
         messages: buildMessages(question, articles),
       }),
     })

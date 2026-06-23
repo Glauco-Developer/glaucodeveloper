@@ -4,16 +4,16 @@ import { useRef, useState, useEffect } from "react"
 
 const principles = [
   {
-    title: "Interface direction",
-    text: "I use layout, type, contrast and pacing to make a product look authored, not merely assembled.",
+    title: "AI Engineering — Infnet",
+    text: "Undergraduate degree in Artificial Intelligence Engineering at Faculdade Infnet, covering data processing, front and back-end development, computer science fundamentals, machine learning and multi-agent systems.",
   },
   {
-    title: "System thinking",
-    text: "Components, states and motion patterns are designed to hold up under scale, not just the first screen.",
+    title: "Applied AI Engineering — UNIPDS",
+    text: "Specialization in Applied AI Engineering (UNIPDS, partnered with Anhanguera), covering LLMs, generative AI APIs, prompt engineering, MCP, autonomous agents and AI-assisted system architecture.",
   },
   {
-    title: "Readable engineering",
-    text: "The implementation should support the idea clearly, with structure that stays useful as the product evolves.",
+    title: "Always learning",
+    text: "Constantly studying spec-driven development, AI-assisted engineering and the evolving Next.js and React ecosystem to keep my craft current.",
   },
 ]
 
@@ -22,7 +22,7 @@ const timeline = [
     year: "Jul 2018 — Present",
     title: "Web Developer at Ebow Digital",
     location: "County Dublin, Ireland",
-    text: "Contributed front-end development for Irish digital projects, including the Virtual Record Treasury of Ireland — work later featured in The New York Times and The Guardian.",
+    text: "Contributed to international digital projects for organisations across Ireland, the United States, the United Kingdom, Switzerland, and beyond, including the Virtual Record Treasury of Ireland, later featured in The New York Times and The Guardian.",
   },
   {
     year: "May 2017 — Mar 2018",
@@ -89,12 +89,12 @@ export function AboutTimeline() {
         {timeline.map((item, index) => (
           <div
             key={item.year}
-            className={`grid gap-4 border-t border-[var(--line)] pt-6 md:grid-cols-[90px_1fr] ${
+            className={`grid gap-4 border-t border-[var(--line)] pt-6 md:grid-cols-[220px_1fr] md:gap-x-10 ${
               isInView ? "animate-fade-up" : "opacity-0"
             }`}
             style={{ animationDelay: `${index * 0.08}s` }}
           >
-            <div className="font-mono text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <div className="whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
               {item.year}
             </div>
             <div>

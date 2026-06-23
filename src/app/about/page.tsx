@@ -6,8 +6,8 @@ import { AboutAwards } from "@/components/about/AboutAwards"
 
 const stats = [
   { value: 12, suffix: "+", label: "Years of craft" },
-  { value: 30, suffix: "+", label: "Projects shipped" },
-  { value: 6, suffix: "", label: "Countries reached through projects" },
+  { value: 100, suffix: "+", label: "Projects shipped" },
+  { value: 15, suffix: "", label: "Countries reached through projects" },
   { value: 100, suffix: "%", label: "Remote" },
 ]
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
           </div>
 
           <h1 className="mt-8 text-[clamp(46px,7.5vw,120px)] font-semibold leading-[0.92] tracking-[-0.06em]">
-            Twelve years of<br />front-end work.
+          A lifelong student of the web.
           </h1>
 
           <p className="mt-8 max-w-[52ch] text-[18px] leading-[1.7] text-[var(--muted)]">

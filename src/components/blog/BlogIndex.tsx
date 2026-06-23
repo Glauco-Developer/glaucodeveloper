@@ -89,11 +89,11 @@ export function BlogIndex({
   }, [articles, category, query, sortMode, isAiMode, aiArticles, isAiSearching])
 
   const aiSuggestions = [
-    "Modern web design trends",
-    "Frontend optimization tips",
-    "DARK UI design systems",
-    "Motion in product design",
-    "Interface craft techniques",
+    "Building search with Supabase and Postgres",
+    "RAG architecture with Next.js and Supabase",
+    "Dark mode implementation patterns",
+    "Practical TypeScript for production apps",
+    "Server vs Client Components in Next.js",
   ]
 
   const runAiSearch = async (text: string) => {
@@ -252,9 +252,10 @@ export function BlogIndex({
             href={featured.href}
             className="group block overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--card)] p-6 transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1"
           >
-            <div
-              className="h-40 rounded-[18px]"
-              style={{ background: featured.coverTone }}
+            <img
+              src={featured.coverImageUrl}
+              alt={featured.title}
+              className="h-40 w-full rounded-[18px] object-cover"
             />
             <div className="mt-5 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
               <span>{featured.category}</span>
@@ -362,7 +363,7 @@ export function BlogIndex({
                 {aiError ?? (
                   <>
                     <span className="font-medium italic text-violet-500">Tip:</span>{" "}
-                    Try searching for &quot;modern web design trends&quot; or &quot;frontend optimization tips&quot;.
+                    Try searching for &quot;RAG with Supabase&quot; or &quot;dark mode patterns&quot;.
                   </>
                 )}
               </p>
@@ -404,13 +405,13 @@ export function BlogIndex({
                   <button
                     key={suggestion}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className="group flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-2 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10"
+                    className="group flex items-start gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-2 text-left transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10"
                   >
                     <Sparkles
                       size={10}
-                      className="text-violet-500 opacity-50 group-hover:opacity-100"
+                      className="mt-0.5 shrink-0 text-violet-500 opacity-50 group-hover:opacity-100"
                     />
-                    <span className="font-mono text-[11px] tracking-tight text-[var(--muted)] group-hover:text-violet-400">
+                    <span className="text-left font-mono text-[11px] tracking-tight text-[var(--muted)] group-hover:text-violet-400">
                       {suggestion}
                     </span>
                   </button>
@@ -486,7 +487,7 @@ export function BlogIndex({
                       <div className="animate-shimmer h-4 w-2/3 rounded-full bg-[var(--line)]/30" />
                     </div>
                   ) : (
-                    <p className="text-[15px] leading-[1.85] text-[var(--ink)]">
+                    <p className="text-[17px] leading-[1.85] text-[var(--ink)]">
                       {aiAnswer}
                       {isAiStreaming && (
                         <span className="ml-0.5 inline-block h-4 w-[2px] -translate-y-[2px] animate-pulse bg-violet-400" />
@@ -506,9 +507,10 @@ export function BlogIndex({
                             href={article.href}
                             className="group flex items-center gap-3 overflow-hidden rounded-[14px] border border-violet-500/15 bg-[var(--card)] p-2.5 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/5"
                           >
-                            <div
-                              className="h-12 w-12 shrink-0 rounded-[10px] transition-transform duration-300 group-hover:scale-105"
-                              style={{ background: article.coverTone }}
+                            <img
+                              src={article.coverImageUrl}
+                              alt={article.title}
+                              className="h-12 w-12 shrink-0 rounded-[10px] object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                             <div className="min-w-0 flex-1">
                               <p className="truncate text-[13px] font-medium text-[var(--ink)] transition-colors duration-300 group-hover:text-violet-400">
@@ -565,9 +567,10 @@ export function BlogIndex({
                     <div className="relative z-10 flex h-full flex-col">
                       {/* Cover zoom via CSS */}
                       <div className="overflow-hidden rounded-[18px]">
-                        <div
-                          className="h-48 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
-                          style={{ background: article.coverTone }}
+                        <img
+                          src={article.coverImageUrl}
+                          alt={article.title}
+                          className="h-48 w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
                         />
                       </div>
 
@@ -576,11 +579,11 @@ export function BlogIndex({
                         <span>{formatBlogDate(article.publishedAt)}</span>
                       </div>
 
-                      <h2 className="mt-4 text-[30px] font-semibold leading-[1.04] tracking-[-0.04em] text-[var(--ink)] transition-all duration-500 group-hover:translate-x-1">
+                      <h2 className="mt-4 text-[30px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--ink)] transition-all duration-500 group-hover:translate-x-1">
                         {article.title}
                       </h2>
 
-                      <p className="mt-4 flex-1 text-[15px] leading-7 text-[var(--muted)] transition-colors duration-500">
+                      <p className="mt-4 flex-1 text-[15px] leading-8 text-[var(--muted)] transition-colors duration-500">
                         {article.excerpt}
                       </p>
 

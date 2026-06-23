@@ -1,8 +1,5 @@
 import type { BlogSection } from "@/types"
 
-export const DEFAULT_COVER_TONE =
-  "linear-gradient(135deg,#111827 0%,#09090b 58%,#404040 100%)"
-
 export function slugify(value: string) {
   return value
     .normalize("NFKD")

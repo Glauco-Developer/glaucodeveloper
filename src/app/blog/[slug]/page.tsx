@@ -39,6 +39,13 @@ export default async function BlogArticlePage({
           </span>
         </div>
 
+        {/* ── Cover image ────────────────────────────────────────── */}
+        <img
+          src={article.coverImageUrl}
+          alt={article.title}
+          className="mt-10 h-[280px] w-full rounded-[22px] border border-[var(--line)] object-cover sm:h-[360px]"
+        />
+
         {/* ── Title + intro ──────────────────────────────────────── */}
         <div className="mt-14">
           <h1 className="text-[clamp(42px,6.5vw,88px)] font-semibold leading-[0.96] tracking-[-0.05em]">

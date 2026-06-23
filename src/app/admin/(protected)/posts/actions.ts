@@ -21,11 +21,17 @@ export async function createPost(
     return { error: values.error }
   }
 
+  const coverImageUrl = await uploadCoverImage(supabase, formData, values.data.slug)
+
+  if (!coverImageUrl) {
+    return { error: "Envie uma imagem de capa para o post." }
+  }
+
   const embedding = await createEmbedding(values.data.content_text)
 
   const { data, error } = await supabase
     .from("blog_posts")
-    .insert({ ...values.data, embedding })
+    .insert({ ...values.data, cover_image_url: coverImageUrl, embedding })
     .select("id")
     .single()
 
@@ -49,11 +55,22 @@ export async function updatePost(
     return { error: values.error }
   }
 
+  const existingCoverImageUrl = String(formData.get("existing_cover_image_url") ?? "").trim()
+  const coverImageUrl = await uploadCoverImage(supabase, formData, values.data.slug)
+
+  if (!coverImageUrl && !existingCoverImageUrl) {
+    return { error: "Envie uma imagem de capa para o post." }
+  }
+
   const embedding = await createEmbedding(values.data.content_text)
 
   const { error } = await supabase
     .from("blog_posts")
-    .update(embedding ? { ...values.data, embedding } : values.data)
+    .update({
+      ...values.data,
+      cover_image_url: coverImageUrl || existingCoverImageUrl,
+      ...(embedding ? { embedding } : {}),
+    })
     .eq("id", id)
 
   if (error) {
@@ -79,6 +96,34 @@ export async function deletePost(id: string, slug: string) {
   redirect("/admin")
 }
 
+type AdminSupabaseClient = Awaited<ReturnType<typeof getAdminActionClient>>["supabase"]
+
+async function uploadCoverImage(
+  supabase: AdminSupabaseClient,
+  formData: FormData,
+  slug: string
+) {
+  const file = formData.get("cover_image")
+
+  if (!(file instanceof File) || file.size === 0) {
+    return null
+  }
+
+  const extension = file.name.split(".").pop()?.toLowerCase() || "jpg"
+  const path = `${slug}-${Date.now()}.${extension}`
+
+  const { error } = await supabase.storage
+    .from("blog-covers")
+    .upload(path, file, { contentType: file.type || "image/jpeg" })
+
+  if (error) {
+    throw new Error(`Falha ao enviar a imagem de capa: ${error.message}`)
+  }
+
+  const { data } = supabase.storage.from("blog-covers").getPublicUrl(path)
+  return data.publicUrl
+}
+
 function getPostValues(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim()
   const rawSlug = String(formData.get("slug") ?? "").trim()
@@ -86,7 +131,6 @@ function getPostValues(formData: FormData) {
   const intro = String(formData.get("intro") ?? "").trim()
   const categoryId = String(formData.get("category_id") ?? "").trim()
   const readTime = String(formData.get("read_time") ?? "").trim()
-  const coverTone = String(formData.get("cover_tone") ?? "").trim()
   const sections = parseSectionsInput(String(formData.get("sections") ?? "[]"))
   const tags = parseCommaList(String(formData.get("tags") ?? ""))
 
@@ -115,7 +159,6 @@ function getPostValues(formData: FormData) {
       intro,
       category_id: categoryId,
       tags,
-      cover_tone: coverTone || undefined,
       sections,
       content_text: buildContentText(intro, sections, { title, excerpt, tags }),
       read_time: readTime,

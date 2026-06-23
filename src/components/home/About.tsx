@@ -3,8 +3,8 @@
 import { useRef, useState, useEffect } from "react"
 
 const stats = [
-  { value: 12, suffix: "+", label: "years of experience across studios and product teams" },
-  { value: 8, suffix: "+", label: "international recognitions tied to projects I've contributed to" },
+  { value: 12, suffix: "+", label: "years of experience across agencies and digital projects" },
+  { value: 8, suffix: "+", label: "international recognitions across projects I've worked on" },
 ]
 
 // Contador animado em JS puro — sem Framer Motion
@@ -79,13 +79,11 @@ export function About() {
           }`}
           style={{ animationDelay: "0.1s" }}
         >
-          I&apos;ve spent the last twelve years building on the web —{" "}
-          <span className="text-[var(--muted)]">
-            across studios and international teams, shipping production work end to end
-          </span>
-          . That gave me more than code: product judgment, communication, and the discipline of delivery. Lately I&apos;m digging into{" "}
-          <span className="font-medium text-[var(--ink)]">React, Next.js</span>{" "}
-          and AI-powered applications.
+I build for the web —{" "}
+<span className="text-[var(--muted)]">
+  contributing to digital products through thoughtful problem solving, careful execution, and a strong attention to detail
+</span>
+. I enjoy the process of turning ideas into reliable experiences that people can use every day.
         </p>
 
         <div ref={statsRef} className="mt-24 space-y-12">

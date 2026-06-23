@@ -51,7 +51,7 @@ export type BlogPostRow = {
   intro: string
   category_id: string | null
   tags: string[]
-  cover_tone: string
+  cover_image_url: string
   sections: BlogSection[]
   content_text: string
   read_time: string
@@ -78,7 +78,7 @@ export type BlogArticle = {
   publishedAt: string | null
   featured: boolean
   published: boolean
-  coverTone: string
+  coverImageUrl: string
   tags: string[]
   intro: string
   sections: BlogSection[]

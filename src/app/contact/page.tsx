@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { ContactForm } from "@/components/contact/ContactForm"
 
 const focusAreas = [
@@ -48,8 +47,22 @@ export default function ContactPage() {
             </a>
 
             <div className="mt-7 flex gap-6 border-b border-(--line) pb-7 font-mono text-[11px] uppercase tracking-[0.22em]">
-              <Link href="#" className="text-(--muted) transition-colors hover:text-(--ink)">LinkedIn</Link>
-              <Link href="#" className="text-(--muted) transition-colors hover:text-(--ink)">GitHub</Link>
+              <a
+                href="https://www.linkedin.com/in/glauco-raupp-russo/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-(--muted) transition-colors hover:text-(--ink)"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/Glauco-Developer"
+                target="_blank"
+                rel="noreferrer"
+                className="text-(--muted) transition-colors hover:text-(--ink)"
+              >
+                GitHub
+              </a>
             </div>
 
             <div className="mt-7 border-b border-(--line) pb-7">

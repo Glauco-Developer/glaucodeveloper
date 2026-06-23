@@ -3,14 +3,14 @@ import { normalizePostRow, rowToArticle, rowToCategory } from "./transforms"
 import type { BlogCategoryRow, BlogPostRowWithCategory } from "@/types"
 
 const PUBLISHED_POST_SELECT =
-  "id, slug, title, excerpt, intro, category_id, tags, cover_tone, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
+  "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
 
 export async function getPublishedPosts() {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from("blog_posts")
     .select(
-      "id, slug, title, excerpt, intro, category_id, tags, cover_tone, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
+      "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
     )
     .eq("published", true)
     .order("published_at", { ascending: false })
@@ -78,7 +78,7 @@ export async function getPostBySlug(slug: string) {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(
-      "id, slug, title, excerpt, intro, category_id, tags, cover_tone, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
+      "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
     )
     .eq("slug", slug)
     .eq("published", true)
@@ -101,7 +101,7 @@ export async function getAdminPosts() {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(
-      "id, slug, title, excerpt, intro, category_id, tags, cover_tone, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
+      "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
     )
     .order("updated_at", { ascending: false })
 
@@ -119,7 +119,7 @@ export async function getAdminPostById(id: string) {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(
-      "id, slug, title, excerpt, intro, category_id, tags, cover_tone, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
+      "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
     )
     .eq("id", id)
     .single()

@@ -67,7 +67,11 @@ export function WorkGrid({ projects }: WorkGridProps) {
                 {project.description}
               </div>
 
-              <div className="mb-[18px] grid gap-4 border-t border-[var(--line)] pt-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+              <div
+                className={`mb-[18px] grid gap-4 border-t border-[var(--line)] pt-5 ${
+                  project.mentions?.length ? "md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]" : ""
+                }`}
+              >
                 <div>
                   <b className="mb-2 block font-mono text-[11.5px] uppercase tracking-[0.5px] text-[var(--ink)]">
                     Site
@@ -88,11 +92,11 @@ export function WorkGrid({ projects }: WorkGridProps) {
                   )}
                 </div>
 
-                <div>
-                  <b className="mb-2 block font-mono text-[11.5px] uppercase tracking-[0.5px] text-[var(--ink)]">
-                    Mentions
-                  </b>
-                  {project.mentions?.length ? (
+                {project.mentions?.length ? (
+                  <div>
+                    <b className="mb-2 block font-mono text-[11.5px] uppercase tracking-[0.5px] text-[var(--ink)]">
+                      Mentions
+                    </b>
                     <div className="flex flex-wrap gap-2">
                       {project.mentions.map((mention) => (
                         <a
@@ -107,10 +111,8 @@ export function WorkGrid({ projects }: WorkGridProps) {
                         </a>
                       ))}
                     </div>
-                  ) : (
-                    <span className="text-sm text-[var(--muted)]">No public mentions listed</span>
-                  )}
-                </div>
+                  </div>
+                ) : null}
               </div>
 
               <div className="flex flex-wrap gap-[7px]">

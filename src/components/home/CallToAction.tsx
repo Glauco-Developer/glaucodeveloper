@@ -60,14 +60,19 @@ export function CallToAction() {
           }`}
           style={{ animationDelay: "0.4s" }}
         >
-          {["GitHub", "LinkedIn", "Resume ↗"].map((label) => (
+          {[
+            { label: "GitHub", href: "https://github.com/Glauco-Developer" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/glauco-raupp-russo/" },
+          ].map((link) => (
             <a
-              key={label}
-              href="#"
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
               className="font-mono text-[13px] text-[var(--muted)] transition-colors duration-300 hover:text-[var(--ink)]"
               data-interactive="true"
             >
-              {label}
+              {link.label}
             </a>
           ))}
         </div>

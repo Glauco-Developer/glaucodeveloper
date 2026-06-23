@@ -33,19 +33,19 @@ const awards = [
     index: "06",
     title: "Honors",
     org: "Awwwards",
-    category: "Benoît Nihant",
+    category: "Perverte",
   },
   {
     index: "07",
     title: "UI Design, UX Design & Innovation",
     org: "CSS Design Awards",
-    category: "Benoît Nihant",
+    category: "Perverte",
   },
   {
     index: "08",
     title: "Webpick of the Day",
     org: "Communication Arts",
-    category: "Benoît Nihant",
+    category: "Perverte",
   },
 ]
 
@@ -57,7 +57,7 @@ export function AboutAwards() {
           Recognition
         </h2>
         <p className="mb-1 max-w-[36ch] text-right font-mono text-[12px] uppercase tracking-[0.18em] text-[var(--muted)]">
-          Recognition tied to projects I contributed to
+        Awards and recognitions associated with my work
         </p>
       </div>
 

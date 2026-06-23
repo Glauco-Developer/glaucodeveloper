@@ -78,7 +78,9 @@ export function Navbar() {
 
           <div className="hidden items-center gap-5 text-[var(--nav-ink)] md:flex">
             <a
-              href="#"
+              href="https://github.com/Glauco-Developer"
+              target="_blank"
+              rel="noreferrer"
               aria-label="GitHub"
               className="opacity-80 transition-opacity hover:opacity-100"
               data-interactive="true"
@@ -86,7 +88,9 @@ export function Navbar() {
               <GithubIcon size={18} />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/glauco-raupp-russo/"
+              target="_blank"
+              rel="noreferrer"
               aria-label="LinkedIn"
               className="opacity-80 transition-opacity hover:opacity-100"
               data-interactive="true"

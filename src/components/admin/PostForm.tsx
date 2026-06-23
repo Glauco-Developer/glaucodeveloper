@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useState } from "react"
-import { DEFAULT_COVER_TONE, slugify } from "@/lib/blog"
+import { slugify } from "@/lib/blog"
 import type { BlogArticle, BlogCategory } from "@/types"
 
 type PostFormState = {
@@ -46,7 +46,14 @@ export function PostForm({
   const [slugInput, setSlugInput] = useState(post?.slug ?? "")
   const [slugTouched, setSlugTouched] = useState(Boolean(post?.slug))
   const [sections, setSections] = useState<EditableSection[]>(toEditableSections(post))
+  const [coverPreview, setCoverPreview] = useState<string | null>(post?.coverImageUrl ?? null)
   const slug = slugTouched ? slugInput : slugify(title)
+
+  function handleCoverChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    if (!file) return
+    setCoverPreview(URL.createObjectURL(file))
+  }
 
   const serializedSections = JSON.stringify(
     sections.map((section) => ({
@@ -65,6 +72,11 @@ export function PostForm({
         type="hidden"
         name="existing_published_at"
         value={post?.publishedAt ?? ""}
+      />
+      <input
+        type="hidden"
+        name="existing_cover_image_url"
+        value={post?.coverImageUrl ?? ""}
       />
 
       {state.error ? (
@@ -169,13 +181,26 @@ export function PostForm({
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm text-[var(--muted)]">Gradiente do cover</span>
-        <textarea
-          name="cover_tone"
-          defaultValue={post?.coverTone ?? DEFAULT_COVER_TONE}
-          rows={3}
-          className="w-full rounded-2xl border border-[var(--line)] bg-[var(--bg-2)] px-4 py-3 font-mono text-sm outline-none focus:border-[var(--ink)]"
+        <span className="text-sm text-[var(--muted)]">Imagem de capa</span>
+        {coverPreview ? (
+          <div
+            className="h-48 w-full rounded-2xl border border-[var(--line)] bg-cover bg-center"
+            style={{ backgroundImage: `url(${coverPreview})` }}
+          />
+        ) : null}
+        <input
+          type="file"
+          name="cover_image"
+          accept="image/png, image/jpeg, image/webp"
+          onChange={handleCoverChange}
+          required={!post?.coverImageUrl}
+          className="w-full rounded-2xl border border-[var(--line)] bg-[var(--bg-2)] px-4 py-3 text-sm outline-none focus:border-[var(--ink)]"
         />
+        <p className="text-xs text-[var(--muted)]">
+          {post?.coverImageUrl
+            ? "Envie uma nova imagem para substituir a capa atual, ou deixe em branco para manter."
+            : "JPEG, PNG ou WebP. Sera redimensionada para o card do blog."}
+        </p>
       </label>
 
       <section className="space-y-4 rounded-[1.5rem] border border-[var(--line)] bg-[var(--bg-2)] p-5">

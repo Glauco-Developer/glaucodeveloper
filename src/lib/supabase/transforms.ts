@@ -34,7 +34,7 @@ export function rowToArticle(row: BlogPostRowWithCategory): BlogArticle {
     publishedAt: row.published_at,
     featured: row.featured,
     published: row.published,
-    coverTone: row.cover_tone,
+    coverImageUrl: row.cover_image_url,
     tags: row.tags ?? [],
     intro: row.intro,
     sections: parseSections(row.sections),

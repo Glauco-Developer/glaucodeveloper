@@ -9,7 +9,7 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
         <div className="mx-auto max-w-[1600px]">
           <div className="animate-fade-up mb-10 flex flex-wrap items-end justify-between gap-[18px]">
             <h2 className="text-[clamp(34px,5.5vw,72px)] font-semibold leading-[0.95] tracking-[-0.03em]">
-              Writing on interface craft
+            Thoughts on web development
             </h2>
             <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-(--muted)">
               <b className="font-medium text-(--ink)">04</b> / Blog
@@ -33,7 +33,7 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
 
         <div className="animate-fade-up mb-10 flex flex-wrap items-end justify-between gap-[18px]">
           <h2 className="text-[clamp(34px,5.5vw,72px)] font-semibold leading-[0.95] tracking-[-0.03em]">
-            Writing on interface craft
+          Building for the Web
           </h2>
           <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-(--muted)">
             <b className="font-medium text-(--ink)">04</b> / Blog
@@ -52,9 +52,10 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-interactive="true"
               >
-                <div
-                  className="h-[160px] w-full shrink-0 transition-[filter,transform] duration-700 group-hover:brightness-110 group-hover:scale-[1.02]"
-                  style={{ background: article.coverTone }}
+                <img
+                  src={article.coverImageUrl}
+                  alt={article.title}
+                  className="h-[160px] w-full shrink-0 object-cover transition-[filter,transform] duration-700 group-hover:brightness-110 group-hover:scale-[1.02]"
                 />
 
                 <div className="flex flex-1 flex-col p-7">
