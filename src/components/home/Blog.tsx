@@ -12,7 +12,7 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
             Thoughts on web development
             </h2>
             <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-(--muted)">
-              <b className="font-medium text-(--ink)">04</b> / Blog
+              <b className="font-medium text-(--ink)">04</b> / Dev Notes
             </div>
           </div>
 
@@ -36,7 +36,7 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
           Building for the Web
           </h2>
           <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-(--muted)">
-            <b className="font-medium text-(--ink)">04</b> / Blog
+            <b className="font-medium text-(--ink)">04</b> / Dev Notes
           </div>
         </div>
 

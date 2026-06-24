@@ -52,7 +52,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-[22px] max-w-[520px] text-[15px] leading-[1.75] text-white/72 sm:text-[16px]">
-            I'm Glauco Russo, a web developer with 12+ years of experience in the industry. My work focuses on developing functional web platforms, combining clean code with modern backend integrations and practical AI features.
+            I'm Glauco Russo, a web developer with 15+ years of experience in the industry. My work focuses on developing functional web platforms, combining clean code with modern backend integrations and practical AI features.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">

@@ -52,7 +52,7 @@ Cada post guarda:
 - `intro`
 - `sections`
 - `tags`
-- `cover_tone`
+- `cover_image_url`
 - `read_time`
 - `featured`
 - `published`
@@ -80,6 +80,20 @@ Isso foi escolhido porque é o jeito mais simples de:
 - manter o layout atual
 - editar conteúdo no admin
 - evitar introduzir um editor rico cedo demais
+
+---
+
+### Sobre `cover_image_url`
+
+Cada post precisa de uma imagem de capa real, enviada pelo admin (sem mais gradiente
+CSS como placeholder). O arquivo é salvo no Supabase Storage, bucket `blog-covers`
+(público para leitura), e `cover_image_url` guarda a URL pública gerada.
+
+Esse bucket também é criado pelo `supabase/blog-schema.sql`, com duas policies:
+
+- leitura pública (`select`) para qualquer um, já que as imagens aparecem no site
+- escrita (`insert`/`update`/`delete`) só para usuários autenticados — o mesmo
+  usuário admin que já gerencia posts e categorias
 
 ---
 

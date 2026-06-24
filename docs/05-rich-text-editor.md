@@ -246,9 +246,8 @@ export function PostForm({ post }: { post?: BlogPost }) {
           defaultValue={post?.readTime ?? '5 min read'} />
       </div>
 
-      <Field label="Cover tone (gradiente CSS)" name="cover_tone"
-        defaultValue={post?.coverTone ?? 'linear-gradient(135deg,#111827 0%,#09090b 100%)'}
-        hint="Ex: linear-gradient(135deg,#7f1d1d 0%,#18181b 100%)" />
+      <Field label="Imagem de capa" name="cover_image" as="file"
+        hint="JPEG, PNG ou WebP — enviada para o bucket blog-covers no Supabase Storage" />
 
       <div className="flex gap-6">
         <label className="flex items-center gap-2 text-sm">

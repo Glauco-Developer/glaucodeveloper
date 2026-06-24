@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import type { Project } from "@/types"
 
 type WorkGridProps = {
@@ -21,15 +22,25 @@ export function WorkGrid({ projects }: WorkGridProps) {
             style={{ animationDelay: `${index * 0.15}s` }}
           >
             <div className="relative h-60 overflow-hidden border-b border-[var(--line)]">
-              <div
-                className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-105"
-                style={{
-                  background:
-                    index % 2 === 0
-                      ? "linear-gradient(135deg,#2a2a2a,#0a0a0a 60%,#444)"
-                      : "linear-gradient(135deg,#fafafa,#bdbdbd 55%,#7a7a7a)",
-                }}
-              />
+              {project.imageUrl ? (
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-1000 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-105"
+                />
+              ) : (
+                <div
+                  className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-105"
+                  style={{
+                    background:
+                      index % 2 === 0
+                        ? "linear-gradient(135deg,#2a2a2a,#0a0a0a 60%,#444)"
+                        : "linear-gradient(135deg,#fafafa,#bdbdbd 55%,#7a7a7a)",
+                  }}
+                />
+              )}
               {project.year ? (
                 <span className="absolute left-[14px] top-[14px] rounded-[20px] border border-[var(--line)] bg-[var(--bg)] px-[11px] py-[5px] font-mono text-[11px] transition-colors duration-300">
                   {project.year}

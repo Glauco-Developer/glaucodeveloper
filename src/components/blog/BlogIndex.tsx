@@ -216,7 +216,7 @@ export function BlogIndex({
       <div className="mx-auto max-w-[1600px] px-[4vw] pb-[120px] pt-[140px]">
         <section className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] px-8 py-16 text-center">
           <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[var(--muted)]">
-            Journal
+            Dev Notes
           </p>
           <h1 className="mt-5 text-[clamp(34px,6vw,72px)] font-semibold leading-[0.94] tracking-[-0.05em]">
             Nenhum artigo publicado ainda.
@@ -236,7 +236,7 @@ export function BlogIndex({
       <section className="animate-fade-up grid gap-10 border-b border-[var(--line)] pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
           <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[var(--muted)]">
-            Journal / Interface thinking
+            Dev Notes / Interface thinking
           </p>
           <h1 className="mt-5 max-w-[12ch] text-[clamp(44px,7vw,108px)] font-semibold leading-[0.92] tracking-[-0.05em]">
             Writing that treats front-end like product design.

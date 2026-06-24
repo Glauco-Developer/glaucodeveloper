@@ -9,7 +9,7 @@ import { GithubIcon, LinkedinIcon } from "./icons"
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Blog", href: "/blog" },
+  { label: "Dev Notes", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ]

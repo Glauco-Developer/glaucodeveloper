@@ -90,7 +90,7 @@ O formulário principal fica em:
 - categoria
 - tags
 - read time
-- cover tone
+- imagem de capa (upload de arquivo, salvo no bucket `blog-covers`)
 - publicado
 - destaque
 - seções do artigo
@@ -117,11 +117,16 @@ O CRUD foi feito com `Server Actions`, porque esse é o caminho mais simples e i
 
 Fluxo:
 
-1. o `<form>` envia `FormData`
+1. o `<form>` envia `FormData` (incluindo o arquivo de imagem, em `cover_image`)
 2. a action roda no servidor
-3. o Supabase grava no banco
-4. o Next revalida as páginas afetadas
-5. a action redireciona de volta
+3. se um arquivo foi enviado, ele é gravado no bucket `blog-covers` do Supabase
+   Storage (`uploadCoverImage` em `actions.ts`) e a URL pública gerada vira
+   `cover_image_url`
+4. ao editar, se nenhum arquivo novo for enviado, mantém a URL existente
+   (vem de um input hidden, `existing_cover_image_url`)
+5. o Supabase grava o post no banco
+6. o Next revalida as páginas afetadas
+7. a action redireciona de volta
 
 As revalidações principais são:
 

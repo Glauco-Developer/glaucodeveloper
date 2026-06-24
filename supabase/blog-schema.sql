@@ -16,7 +16,7 @@ create table if not exists public.blog_posts (
   intro text not null,
   sections jsonb not null default '[]'::jsonb,
   tags text[] not null default '{}'::text[],
-  cover_tone text not null default 'linear-gradient(135deg,#111827 0%,#09090b 58%,#404040 100%)',
+  cover_image_url text not null,
   content_text text not null default '',
   read_time text not null default '5 min read',
   featured boolean not null default false,
@@ -77,3 +77,20 @@ create policy "posts admin full access"
   to authenticated
   using (true)
   with check (true);
+
+-- Storage bucket for blog post cover images.
+insert into storage.buckets (id, name, public)
+values ('blog-covers', 'blog-covers', true)
+on conflict (id) do nothing;
+
+drop policy if exists "Public read blog covers" on storage.objects;
+create policy "Public read blog covers"
+  on storage.objects for select
+  using (bucket_id = 'blog-covers');
+
+drop policy if exists "Authenticated manage blog covers" on storage.objects;
+create policy "Authenticated manage blog covers"
+  on storage.objects for all
+  to authenticated
+  using (bucket_id = 'blog-covers')
+  with check (bucket_id = 'blog-covers');
