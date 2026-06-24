@@ -127,8 +127,8 @@ export function AboutPrinciples() {
           <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-[var(--muted)]">
             0{index + 1}
           </div>
-          <h3 className="mt-6 text-[28px] font-semibold tracking-[-0.04em]">{item.title}</h3>
-          <p className="mt-4 text-[15px] leading-7 text-[var(--muted)]">{item.text}</p>
+          <h3 className="mt-6 text-[28px] font-semibold leading-[1.18] tracking-[-0.04em]">{item.title}</h3>
+          <p className="mt-4 text-[15px] leading-8 text-[var(--muted)]">{item.text}</p>
         </article>
       ))}
     </section>

@@ -51,10 +51,10 @@ export function WorkGrid({ projects }: WorkGridProps) {
             <div className="p-[26px]">
               <div className="mb-3 flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="mb-1 text-[26px] font-semibold tracking-[-0.02em] transition-colors duration-300">
+                  <h3 className="mb-1 text-[26px] font-semibold leading-[1.18] tracking-[-0.02em] transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <div className="font-mono text-[13px] text-[var(--muted)]">
+                  <div className="font-mono text-[13px] leading-[1.6] text-[var(--muted)]">
                     {project.agency ? (
                       <>
                         Contributed at{" "}
@@ -67,7 +67,7 @@ export function WorkGrid({ projects }: WorkGridProps) {
                 </div>
               </div>
 
-              <div className="mb-[18px] text-sm leading-[1.7] text-[var(--muted)]">
+              <div className="mb-[18px] text-sm leading-[1.85] text-[var(--muted)]">
                 <b className="mb-0.5 mt-3 block font-mono text-[11.5px] uppercase tracking-[0.5px] text-[var(--ink)]">
                   Role
                 </b>

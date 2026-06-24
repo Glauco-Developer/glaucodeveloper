@@ -1,14 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useActionState, useState } from "react"
+import { submitContactForm, type ContactFormState } from "@/app/contact/actions"
 
 const field =
   "w-full rounded-[14px] border border-(--line) bg-(--bg-2) px-4 py-3.5 text-[15px] outline-none transition-colors duration-200 focus:border-(--ink) placeholder:text-(--muted)"
 
-export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
+const initialState: ContactFormState = {}
 
-  if (submitted) {
+export function ContactForm() {
+  const [startedAt] = useState(() => Date.now().toString())
+  const [state, formAction, pending] = useActionState(submitContactForm, initialState)
+
+  if (state.success) {
     return (
       <div className="flex min-h-[420px] flex-col items-center justify-center rounded-[28px] border border-(--line) bg-(--card) p-10 text-center">
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-(--line) text-[20px]">
@@ -26,47 +30,92 @@ export function ContactForm() {
         Send a message
       </p>
 
-      <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }} className="space-y-5">
+      <form action={formAction} className="space-y-5">
+        <input type="hidden" name="startedAt" value={startedAt} />
+        <input
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          className="sr-only"
+          aria-hidden="true"
+        />
+
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Name</span>
-            <input required placeholder="Your name" className={field} />
+            <input
+              name="name"
+              required
+              maxLength={120}
+              autoComplete="name"
+              placeholder="Your name"
+              className={field}
+            />
           </label>
           <label className="space-y-2">
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Email</span>
-            <input type="email" required placeholder="your@email.com" className={field} />
+            <input
+              name="email"
+              type="email"
+              required
+              maxLength={160}
+              autoComplete="email"
+              placeholder="your@email.com"
+              className={field}
+            />
           </label>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Subject</span>
-            <input placeholder="A quick note about why you're writing" className={field} />
+            <input
+              name="subject"
+              maxLength={160}
+              placeholder="A quick note about why you're writing"
+              className={field}
+            />
           </label>
           <label className="space-y-2">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Context</span>
-            <input placeholder="Work, collaboration, feedback..." className={field} />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Country</span>
+            <input
+              name="country"
+              maxLength={120}
+              placeholder="Brazil, Ireland, United States..."
+              className={field}
+            />
           </label>
         </div>
 
         <label className="space-y-2">
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-(--muted)">Message</span>
           <textarea
+            name="message"
             required
             rows={6}
+            minLength={20}
+            maxLength={4000}
             placeholder="Write your message here..."
             className={`${field} resize-none`}
           />
         </label>
 
+        {state.error ? (
+          <p className="rounded-[14px] border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-300">
+            {state.error}
+          </p>
+        ) : null}
+
         <div className="flex justify-end pt-2">
           <button
             type="submit"
+            disabled={pending}
             className="cta-shape cta-shape-light inline-flex items-center gap-2.5 rounded-[40px] px-7 py-3.5 font-mono text-[13px] font-medium text-black"
             data-interactive="true"
           >
             <span className="cta-shape-fill" />
-            <span className="relative z-[1]">Send message</span>
+            <span className="relative z-[1]">{pending ? "Sending..." : "Send message"}</span>
             <span className="relative z-[1] text-[11px]">↗</span>
           </button>
         </div>

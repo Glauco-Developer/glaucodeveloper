@@ -24,7 +24,7 @@ export async function getPublishedPosts() {
   )
 }
 
-const MIN_SIMILARITY = 0.5
+const MIN_SIMILARITY = 0.35
 
 export async function searchPostsByEmbedding(embedding: number[], limit = 6) {
   const supabase = await createClient()
@@ -62,6 +62,87 @@ export async function searchPostsByEmbedding(embedding: number[], limit = 6) {
     .map((id) => rows.find((row) => row.id === id))
     .filter((row): row is BlogPostRowWithCategory => Boolean(row))
     .map(rowToArticle)
+}
+
+function normalizeSearchText(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+}
+
+function tokenizeQuery(query: string) {
+  return Array.from(
+    new Set(
+      normalizeSearchText(query)
+        .split(/[^a-z0-9]+/g)
+        .map((token) => token.trim())
+        .filter((token) => token.length >= 3)
+    )
+  )
+}
+
+function scoreKeywordMatch(
+  row: BlogPostRowWithCategory,
+  query: string,
+  tokens: string[]
+) {
+  const title = normalizeSearchText(row.title)
+  const excerpt = normalizeSearchText(row.excerpt)
+  const intro = normalizeSearchText(row.intro)
+  const tags = normalizeSearchText((row.tags ?? []).join(" "))
+  const content = normalizeSearchText(row.content_text)
+  const normalizedQuery = normalizeSearchText(query).trim()
+
+  let score = 0
+
+  if (normalizedQuery && title.includes(normalizedQuery)) score += 12
+  if (normalizedQuery && excerpt.includes(normalizedQuery)) score += 8
+  if (normalizedQuery && intro.includes(normalizedQuery)) score += 6
+  if (normalizedQuery && content.includes(normalizedQuery)) score += 5
+
+  for (const token of tokens) {
+    if (title.includes(token)) score += 4
+    if (tags.includes(token)) score += 3
+    if (excerpt.includes(token)) score += 2
+    if (intro.includes(token)) score += 2
+    if (content.includes(token)) score += 1
+  }
+
+  return score
+}
+
+export async function searchPostsByKeyword(query: string, limit = 6) {
+  const normalizedQuery = query.trim()
+
+  if (!normalizedQuery) {
+    return []
+  }
+
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select(PUBLISHED_POST_SELECT)
+    .eq("published", true)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  const rows = ((data ?? []) as unknown[]).map((row) =>
+    normalizePostRow(row as unknown as BlogPostRowWithCategory)
+  )
+  const tokens = tokenizeQuery(normalizedQuery)
+
+  return rows
+    .map((row) => ({
+      row,
+      score: scoreKeywordMatch(row, normalizedQuery, tokens),
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, limit)
+    .map((entry) => rowToArticle(entry.row))
 }
 
 export async function getPublishedCategories() {

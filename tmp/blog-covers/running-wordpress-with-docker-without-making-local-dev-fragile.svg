@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a2740"/>
+      <stop offset="48%" stop-color="#17263a"/>
+      <stop offset="100%" stop-color="#0d111a"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1220 160) rotate(122) scale(360 280)">
+      <stop offset="0%" stop-color="#88ddff" stop-opacity="0.36"/>
+      <stop offset="100%" stop-color="#88ddff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1280 730) rotate(180) scale(420 320)">
+      <stop offset="0%" stop-color="#5fb6ff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#5fb6ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    </pattern>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="32"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.48"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <circle cx="1320" cy="184" r="88" fill="#88ddff" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="1160" cy="730" r="120" fill="#5fb6ff" opacity="0.12" filter="url(#blur)"/>
+
+  <rect x="78" y="78" width="220" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
+  <text x="188" y="102" text-anchor="middle" fill="#c3d0db" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3.2">DEVOPS FOR WORDPRESS</text>
+
+  <g transform="translate(76 220)">
+    <text x="0" y="0" fill="#f5f7fb" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">Running WordPress with</text>
+<text x="0" y="86" fill="#f5f7fb" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">Docker Without Fragility</text>
+    <text x="2" y="226" fill="#c3d0db" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">A reproducible local stack that</text>
+<text x="2" y="262" fill="#c3d0db" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">stays boring</text>
+  </g>
+
+  <g transform="translate(1035 178)">
+    
+    <rect x="0" y="0" width="410" height="292" rx="34" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" />
+    <rect x="64" y="82" width="118" height="90" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" />
+    <rect x="228" y="82" width="118" height="90" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" />
+    <rect x="146" y="36" width="118" height="90" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" />
+    <path d="M182 80H228" stroke="#88ddff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M122 126H170" stroke="#5fb6ff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M286 126H334" stroke="#5fb6ff" stroke-width="8" stroke-linecap="round"/>
+    <rect x="58" y="210" width="294" height="38" rx="19" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" />
+    <text x="205" y="234" text-anchor="middle" fill="#88ddff" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.4">docker compose up -d</text>
+  
+  </g>
+
+  <g opacity="0.9">
+    <path d="M74 824H1526" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    <text x="78" y="860" fill="#c3d0db" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">glaucodeveloper.com</text>
+    <text x="1522" y="860" text-anchor="end" fill="#c3d0db" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">EDITORIAL COVER</text>
+  </g>
+</svg>

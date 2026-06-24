@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#08111e"/>
+      <stop offset="48%" stop-color="#123a73"/>
+      <stop offset="100%" stop-color="#0a7666"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1220 160) rotate(122) scale(360 280)">
+      <stop offset="0%" stop-color="#95f3e4" stop-opacity="0.36"/>
+      <stop offset="100%" stop-color="#95f3e4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1280 730) rotate(180) scale(420 320)">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+    </pattern>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="32"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.48"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <circle cx="1320" cy="184" r="88" fill="#95f3e4" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="1160" cy="730" r="120" fill="#60a5fa" opacity="0.12" filter="url(#blur)"/>
+
+  <rect x="78" y="78" width="220" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)"/>
+  <text x="188" y="102" text-anchor="middle" fill="#bfd5e7" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3.2">AI ENGINEERING</text>
+
+  <g transform="translate(76 220)">
+    <text x="0" y="0" fill="#eff6ff" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">Supabase Vector Database</text>
+<text x="0" y="86" fill="#eff6ff" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">for RAG in Next.js</text>
+    <text x="2" y="226" fill="#bfd5e7" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">From chunking and embeddings to</text>
+<text x="2" y="262" fill="#bfd5e7" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">retrieval</text>
+  </g>
+
+  <g transform="translate(1035 178)">
+    
+      <rect x="0" y="0" width="410" height="320" rx="34" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.16)" />
+      <circle cx="66" cy="54" r="12" fill="#95f3e4" />
+      <circle cx="184" cy="88" r="12" fill="#60a5fa" />
+      <circle cx="312" cy="54" r="12" fill="#95f3e4" />
+      <circle cx="124" cy="170" r="14" fill="#60a5fa" />
+      <circle cx="252" cy="182" r="14" fill="#95f3e4" />
+      <circle cx="356" cy="254" r="14" fill="#60a5fa" />
+      <path d="M66 54L184 88L312 54L252 182L124 170L356 254" stroke="rgba(255,255,255,0.42)" stroke-width="3"/>
+      <rect x="38" y="230" width="188" height="52" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.16)" />
+      <rect x="56" y="247" width="72" height="16" rx="8" fill="#95f3e4" opacity="0.82"/>
+      <rect x="140" y="247" width="64" height="16" rx="8" fill="#60a5fa" opacity="0.82"/>
+      <rect x="248" y="230" width="126" height="52" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.16)" />
+      <path d="M268 262H352" stroke="white" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M268 246H326" stroke="#95f3e4" stroke-width="6" stroke-linecap="round"/>
+    
+  </g>
+
+  <g opacity="0.9">
+    <path d="M74 824H1526" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+    <text x="78" y="860" fill="#bfd5e7" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">glaucodeveloper.com</text>
+    <text x="1522" y="860" text-anchor="end" fill="#bfd5e7" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">EDITORIAL COVER</text>
+  </g>
+</svg>

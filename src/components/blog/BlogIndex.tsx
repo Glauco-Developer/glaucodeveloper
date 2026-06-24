@@ -8,6 +8,105 @@ import type { BlogArticle } from "@/types"
 
 type SortMode = "latest" | "reading" | "title"
 
+const AI_SUGGESTION_LIMIT = 5
+
+function isSuggestionWorthyArticle(article: BlogArticle) {
+  const title = article.title.trim().toLowerCase()
+  const excerpt = article.excerpt.trim().toLowerCase()
+
+  return title.length > 8 && title !== "test" && excerpt !== "test"
+}
+
+function buildSuggestionLabel(article: BlogArticle) {
+  const title = article.title.toLowerCase()
+  const tags = article.tags.map((tag) => tag.toLowerCase())
+
+  if (title.includes("rag")) {
+    return "RAG with Next.js and Supabase"
+  }
+
+  if (title.includes("semantic search")) {
+    return "Semantic search with Supabase embeddings"
+  }
+
+  if (title.includes("full-text search")) {
+    return "Full-text search in Supabase with Postgres"
+  }
+
+  if (title.includes("server actions")) {
+    return "Next.js Server Actions CRUD with Supabase"
+  }
+
+  if (title.includes("server components") && title.includes("client components")) {
+    return "Server vs Client Components in Next.js"
+  }
+
+  if (title.includes("dark mode") && tags.includes("react")) {
+    return "Dark mode with React Context and CSS variables"
+  }
+
+  if (title.includes("dark mode") || tags.includes("dark mode")) {
+    return "Dark mode with CSS variables"
+  }
+
+  if (title.includes("typescript")) {
+    return "TypeScript types for real projects"
+  }
+
+  if (title.includes("tailwind")) {
+    return "Tailwind CSS patterns that scale"
+  }
+
+  if (title.includes("wordpress") && title.includes("docker")) {
+    return "Running WordPress with Docker locally"
+  }
+
+  if (title.includes("wordpress.org") || tags.includes("wordpress plugin")) {
+    return "WordPress plugin launch lessons from All DashAI"
+  }
+
+  if (title.includes("supabase") && title.includes("cms")) {
+    return "Why this blog moved from static files to Supabase"
+  }
+
+  return article.title
+}
+
+function getSuggestionPriority(article: BlogArticle) {
+  const title = article.title.toLowerCase()
+
+  if (title.includes("rag")) return 100
+  if (title.includes("semantic search")) return 95
+  if (title.includes("server actions")) return 90
+  if (title.includes("server components") && title.includes("client components")) return 85
+  if (title.includes("dark mode")) return 80
+  if (title.includes("typescript")) return 75
+  if (title.includes("full-text search")) return 70
+  if (title.includes("tailwind")) return 65
+  if (title.includes("wordpress") && title.includes("docker")) return 60
+  if (title.includes("wordpress.org")) return 55
+  if (title.includes("supabase") && title.includes("cms")) return 50
+
+  return 10
+}
+
+function buildAiSuggestions(articles: BlogArticle[]) {
+  const suggestions = new Set<string>()
+  const rankedArticles = [...articles]
+    .filter(isSuggestionWorthyArticle)
+    .sort((left, right) => getSuggestionPriority(right) - getSuggestionPriority(left))
+
+  for (const article of rankedArticles) {
+    suggestions.add(buildSuggestionLabel(article))
+
+    if (suggestions.size >= AI_SUGGESTION_LIMIT) {
+      break
+    }
+  }
+
+  return Array.from(suggestions)
+}
+
 export function BlogIndex({
   articles,
   categories,
@@ -88,13 +187,7 @@ export function BlogIndex({
     })
   }, [articles, category, query, sortMode, isAiMode, aiArticles, isAiSearching])
 
-  const aiSuggestions = [
-    "Building search with Supabase and Postgres",
-    "RAG architecture with Next.js and Supabase",
-    "Dark mode implementation patterns",
-    "Practical TypeScript for production apps",
-    "Server vs Client Components in Next.js",
-  ]
+  const aiSuggestions = useMemo(() => buildAiSuggestions(articles), [articles])
 
   const runAiSearch = async (text: string) => {
     const trimmed = text.trim()
@@ -184,6 +277,11 @@ export function BlogIndex({
     void runAiSearch(suggestion)
   }
 
+  const aiTipText =
+    aiSuggestions.length >= 2
+      ? `Try searching for "${aiSuggestions[0]}" or "${aiSuggestions[1]}".`
+      : 'Try searching for "RAG with Next.js and Supabase".'
+
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -261,7 +359,7 @@ export function BlogIndex({
               <span>{featured.category}</span>
               <span>{featured.readTime}</span>
             </div>
-            <h2 className="mt-4 text-[26px] font-semibold leading-[1.05] tracking-[-0.04em]">
+            <h2 className="mt-4 text-[26px] font-semibold leading-[1.18] tracking-[-0.04em]">
               {featured.title}
             </h2>
           </Link>
@@ -363,7 +461,7 @@ export function BlogIndex({
                 {aiError ?? (
                   <>
                     <span className="font-medium italic text-violet-500">Tip:</span>{" "}
-                    Try searching for &quot;RAG with Supabase&quot; or &quot;dark mode patterns&quot;.
+                    {aiTipText}
                   </>
                 )}
               </p>
@@ -579,11 +677,11 @@ export function BlogIndex({
                         <span>{formatBlogDate(article.publishedAt)}</span>
                       </div>
 
-                      <h2 className="mt-4 text-[30px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--ink)] transition-all duration-500 group-hover:translate-x-1">
+                      <h2 className="mt-4 text-[30px] font-semibold leading-[1.28] tracking-[-0.04em] text-[var(--ink)] transition-all duration-500 group-hover:translate-x-1">
                         {article.title}
                       </h2>
 
-                      <p className="mt-4 flex-1 text-[15px] leading-8 text-[var(--muted)] transition-colors duration-500">
+                      <p className="mt-4 flex-1 text-[15px] leading-[2.1] text-[var(--muted)] transition-colors duration-500">
                         {article.excerpt}
                       </p>
 

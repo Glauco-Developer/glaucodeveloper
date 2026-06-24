@@ -1,14 +1,5 @@
 import { ContactForm } from "@/components/contact/ContactForm"
 
-const focusAreas = [
-  "Interface systems and front-end craft",
-  "Exploring AI-powered applications",
-  "Product-minded execution",
-  "Experience working with international teams",
-]
-
-const markets = ["Ireland", "United Kingdom", "Belgium", "Switzerland", "United States", "Brazil"]
-
 export default function ContactPage() {
   return (
     <div className="px-[4vw] pb-[140px] pt-[140px]">
@@ -63,36 +54,6 @@ export default function ContactPage() {
               >
                 GitHub
               </a>
-            </div>
-
-            <div className="mt-7 border-b border-(--line) pb-7">
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-(--muted)">
-                Current focus
-              </p>
-              <ul className="mt-4 space-y-3">
-                {focusAreas.map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-[14px] text-(--muted)">
-                    <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-(--muted)" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-7">
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-(--muted)">
-                Places in the journey
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {markets.map((m) => (
-                  <span
-                    key={m}
-                    className="rounded-full border border-(--line) px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-(--muted)"
-                  >
-                    {m}
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
 

@@ -64,11 +64,11 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
                     <span>{article.readTime}</span>
                   </div>
 
-                  <h3 className="mt-5 text-[22px] font-semibold leading-[1.1] tracking-[-0.03em] text-(--ink) transition-colors duration-300">
+                  <h3 className="mt-5 text-[22px] font-semibold leading-[1.22] tracking-[-0.03em] text-(--ink) transition-colors duration-300">
                     {article.title}
                   </h3>
 
-                  <p className="mt-4 flex-1 text-[14px] leading-[1.75] text-(--muted)">
+                  <p className="mt-4 flex-1 text-[14px] leading-[1.9] text-(--muted)">
                     {article.excerpt}
                   </p>
 

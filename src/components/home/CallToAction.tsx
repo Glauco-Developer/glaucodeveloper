@@ -37,9 +37,8 @@ export function CallToAction() {
             isInView ? "animate-fade-up" : "opacity-0"
           }`}
         >
-          Reach out
+          Get in touch
           <br />
-          if relevant.
         </h2>
 
         <a

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#04130d"/>
+      <stop offset="48%" stop-color="#0f3d2e"/>
+      <stop offset="100%" stop-color="#151b2f"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1220 160) rotate(122) scale(360 280)">
+      <stop offset="0%" stop-color="#8df0c7" stop-opacity="0.36"/>
+      <stop offset="100%" stop-color="#8df0c7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1280 730) rotate(180) scale(420 320)">
+      <stop offset="0%" stop-color="#4dd4a8" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#4dd4a8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+    </pattern>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="32"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.48"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <circle cx="1320" cy="184" r="88" fill="#8df0c7" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="1160" cy="730" r="120" fill="#4dd4a8" opacity="0.12" filter="url(#blur)"/>
+
+  <rect x="78" y="78" width="220" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.14)"/>
+  <text x="188" y="102" text-anchor="middle" fill="#b8c2ba" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3.2">PRODUCT LAUNCH</text>
+
+  <g transform="translate(76 220)">
+    <text x="0" y="0" fill="#f4f6f1" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">Launching All DashAI on</text>
+<text x="0" y="86" fill="#f4f6f1" font-family="Inter, Segoe UI, sans-serif" font-size="70" font-weight="700" letter-spacing="-2.4">WordPress.org</text>
+    <text x="2" y="226" fill="#b8c2ba" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">Operational clarity for WordPress</text>
+<text x="2" y="262" fill="#b8c2ba" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.4">teams</text>
+  </g>
+
+  <g transform="translate(1035 178)">
+    
+      <rect x="0" y="0" width="410" height="264" rx="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.14)" />
+      <rect x="28" y="28" width="146" height="78" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+      <rect x="194" y="28" width="188" height="78" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" />
+      <rect x="28" y="128" width="248" height="108" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+      <rect x="296" y="128" width="86" height="108" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" />
+      <path d="M48 201C78 177 108 171 138 182C164 191 196 195 224 164C234 153 250 141 260 142" stroke="#8df0c7" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="88" cy="68" r="16" fill="#4dd4a8" />
+      <rect x="214" y="54" width="114" height="14" rx="7" fill="#8df0c7" opacity="0.8"/>
+      <rect x="214" y="76" width="88" height="10" rx="5" fill="white" opacity="0.56"/>
+      <rect x="318" y="149" width="40" height="16" rx="8" fill="#8df0c7" opacity="0.82"/>
+      <rect x="318" y="176" width="32" height="32" rx="10" fill="#4dd4a8" opacity="0.72"/>
+    
+  </g>
+
+  <g opacity="0.9">
+    <path d="M74 824H1526" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+    <text x="78" y="860" fill="#b8c2ba" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">glaucodeveloper.com</text>
+    <text x="1522" y="860" text-anchor="end" fill="#b8c2ba" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="2.6">EDITORIAL COVER</text>
+  </g>
+</svg>

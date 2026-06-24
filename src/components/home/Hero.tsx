@@ -52,17 +52,17 @@ export function Hero() {
           </h1>
 
           <p className="mt-[22px] max-w-[520px] text-[15px] leading-[1.75] text-white/72 sm:text-[16px]">
-            I'm Glauco Russo, a web developer with 15+ years of experience in the industry. My work focuses on developing functional web platforms, combining clean code with modern backend integrations and practical AI features.
+            I&apos;m Glauco Russo, a web developer with 15+ years of experience in the industry. My work focuses on developing functional web platforms, combining clean code with modern backend integrations and practical AI features.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
             <Link
-              href="#work"
+              href="/about"
               className="cta-shape cta-shape-light inline-flex items-center gap-2 rounded-[40px] px-6 py-3.5 font-mono text-[13px] font-medium text-black"
               data-interactive="true"
             >
               <span className="cta-shape-fill" />
-              <span className="relative z-[1]">See selected work</span>
+              <span className="relative z-[1]">About</span>
             </Link>
             <a
               href="#contact"

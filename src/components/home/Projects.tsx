@@ -13,6 +13,11 @@ export function Projects() {
               <h2 className="text-[clamp(34px,5.5vw,72px)] font-semibold leading-[0.95] tracking-[-0.03em]">
                 Built &amp; contributed
               </h2>
+              <p className="mt-4 max-w-[58ch] text-[15px] leading-7 text-[var(--muted)]">
+                A selection of personal work alongside projects delivered as part of the teams I
+                worked with, where I contributed across front-end development, implementation, and
+                product execution.
+              </p>
             </div>
             <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-[var(--muted)]">
               <b className="font-medium text-[var(--ink)]">03</b> / Projects

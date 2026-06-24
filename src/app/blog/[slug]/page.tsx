@@ -21,6 +21,7 @@ export default async function BlogArticlePage({
   if (!article) notFound()
 
   const words = wordCount(article)
+  const usesContainedCover = article.coverImageUrl === "/alldashai.png"
 
   return (
     <article className="min-h-screen px-[4vw] pb-[140px] pt-[100px]">
@@ -43,7 +44,11 @@ export default async function BlogArticlePage({
         <img
           src={article.coverImageUrl}
           alt={article.title}
-          className="mt-10 h-[280px] w-full rounded-[22px] border border-[var(--line)] object-cover sm:h-[360px]"
+          className={`mt-10 w-full rounded-[22px] border border-[var(--line)] ${
+            usesContainedCover
+              ? "h-[320px] bg-[color:color-mix(in_srgb,var(--card)_88%,white)] object-contain p-4 sm:h-[440px]"
+              : "h-[280px] object-cover sm:h-[360px]"
+          }`}
         />
 
         {/* ── Title + intro ──────────────────────────────────────── */}
