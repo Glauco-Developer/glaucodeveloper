@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { formatBlogDate } from "@/lib/blog"
 import { getPostBySlug } from "@/lib/supabase/queries"
@@ -40,11 +41,16 @@ export default async function BlogArticlePage({
         </div>
 
         {/* ── Cover image ────────────────────────────────────────── */}
-        <img
-          src={article.coverImageUrl}
-          alt={article.title}
-          className="mt-10 w-full rounded-[22px] border border-[var(--line)] h-[280px] object-cover sm:h-[360px]"
-        />
+        <div className="relative mt-10 h-[280px] w-full overflow-hidden rounded-[22px] border border-[var(--line)] sm:h-[360px]">
+          <Image
+            src={article.coverImageUrl}
+            alt={article.title}
+            fill
+            preload
+            sizes="(max-width: 780px) 100vw, 780px"
+            className="object-cover"
+          />
+        </div>
 
         {/* ── Title + intro ──────────────────────────────────────── */}
         <div className="mt-14">

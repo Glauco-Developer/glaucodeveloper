@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useMemo, useRef, useState, useTransition } from "react"
 import { Sparkles, Search, Wand2 } from "lucide-react"
 import { formatBlogDate } from "@/lib/blog"
@@ -350,11 +351,15 @@ export function BlogIndex({
             href={featured.href}
             className="group block overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--card)] p-6 transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1"
           >
-            <img
-              src={featured.coverImageUrl}
-              alt={featured.title}
-              className="h-40 w-full rounded-[18px] object-cover"
-            />
+            <div className="relative h-40 w-full overflow-hidden rounded-[18px]">
+              <Image
+                src={featured.coverImageUrl}
+                alt={featured.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </div>
             <div className="mt-5 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
               <span>{featured.category}</span>
               <span>{featured.readTime}</span>
@@ -605,9 +610,11 @@ export function BlogIndex({
                             href={article.href}
                             className="group flex items-center gap-3 overflow-hidden rounded-[14px] border border-violet-500/15 bg-[var(--card)] p-2.5 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/5"
                           >
-                            <img
+                            <Image
                               src={article.coverImageUrl}
                               alt={article.title}
+                              width={48}
+                              height={48}
                               className="h-12 w-12 shrink-0 rounded-[10px] object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                             <div className="min-w-0 flex-1">
@@ -664,11 +671,13 @@ export function BlogIndex({
 
                     <div className="relative z-10 flex h-full flex-col">
                       {/* Cover zoom via CSS */}
-                      <div className="overflow-hidden rounded-[18px]">
-                        <img
+                      <div className="relative h-48 w-full overflow-hidden rounded-[18px]">
+                        <Image
                           src={article.coverImageUrl}
                           alt={article.title}
-                          className="h-48 w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
+                          fill
+                          sizes="(max-width: 1280px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
                         />
                       </div>
 

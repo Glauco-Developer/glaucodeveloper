@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import type { BlogArticle } from "@/types"
 import { formatBlogDate } from "@/lib/blog"
 
@@ -52,11 +53,15 @@ export function Blog({ posts }: { posts: BlogArticle[] }) {
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-interactive="true"
               >
-                <img
-                  src={article.coverImageUrl}
-                  alt={article.title}
-                  className="h-[160px] w-full shrink-0 object-cover transition-[filter,transform] duration-700 group-hover:brightness-110 group-hover:scale-[1.02]"
-                />
+                <div className="relative h-[160px] w-full shrink-0 overflow-hidden">
+                  <Image
+                    src={article.coverImageUrl}
+                    alt={article.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition-[filter,transform] duration-700 group-hover:brightness-110 group-hover:scale-[1.02]"
+                  />
+                </div>
 
                 <div className="flex flex-1 flex-col p-7">
                   <div className="flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.22em] text-(--muted)">
