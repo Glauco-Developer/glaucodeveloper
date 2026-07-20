@@ -8,7 +8,7 @@ export const projects: Project[] = [
       "A WordPress plugin I built that uses AI to monitor and manage client site portfolios — automated diagnostics on error logs, and weekly reports for agencies running multiple WordPress sites.",
     technologies: ["WordPress", "PHP", "JavaScript", "AI APIs"],
     demoUrl: "https://alldashai.com",
-    imageUrl: "/alldashai.png",
+    imageUrl: "/alldash-ai.png",
     featured: true,
     category: "personal",
     role: "Creator",
