@@ -12,10 +12,6 @@ type RawPostRow = Omit<BlogPostRowWithCategory, "blog_categories"> & {
   blog_categories: RawCategory | RawCategory[] | null
 }
 
-const BLOG_COVER_OVERRIDES: Record<string, string> = {
-  "alldashai-launch-on-wordpress-org": "/alldashai.png",
-}
-
 export function rowToCategory(row: BlogCategoryRow): BlogCategory {
   return {
     id: row.id,
@@ -38,7 +34,7 @@ export function rowToArticle(row: BlogPostRowWithCategory): BlogArticle {
     publishedAt: row.published_at,
     featured: row.featured,
     published: row.published,
-    coverImageUrl: BLOG_COVER_OVERRIDES[row.slug] ?? row.cover_image_url,
+    coverImageUrl: row.cover_image_url,
     tags: row.tags ?? [],
     intro: row.intro,
     sections: parseSections(row.sections),
