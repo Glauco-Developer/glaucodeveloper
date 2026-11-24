@@ -2,6 +2,20 @@ import type { Project } from "@/types"
 
 export const projects: Project[] = [
   {
+    id: "dra-joelly-russo",
+    title: "Dra. Joelly Russo",
+    description:
+      "Website, blog and admin panel for a facial aesthetics clinic in Itapema & Balneário Camboriú, Brazil. Editorial, motion-rich design built for local SEO and WhatsApp bookings, with a custom panel for managing content and patient results.",
+    technologies: ["Next.js", "TypeScript", "Supabase", "GSAP", "Three.js"],
+    demoUrl: "https://drajoellyrusso.com.br",
+    imageUrl: "/projects/dra-joelly-russo-mockup.jpg",
+    featured: true,
+    category: "fullstack",
+    credit: "Freelance · Client project",
+    role: "Design & Full-stack Development",
+    year: "2026",
+  },
+  {
     id: "1",
     title: "AllDash AI",
     description:

@@ -20,7 +20,7 @@ export function Projects() {
               </p>
             </div>
             <div className="flex items-center gap-[10px] font-mono text-[12px] uppercase tracking-[1.5px] text-[var(--muted)]">
-              <b className="font-medium text-[var(--ink)]">03</b> / Projects
+              <b className="font-medium text-[var(--ink)]">{String(projects.length).padStart(2, "0")}</b> / Projects
             </div>
           </div>
         </div>

@@ -14,6 +14,8 @@ export type Project = {
   featured: boolean
   category: "frontend" | "fullstack" | "mobile" | "personal" | "other"
   agency?: string
+  /** Overrides the "Contributed at / Personal project" line in the card. */
+  credit?: string
   role?: string
 }
 

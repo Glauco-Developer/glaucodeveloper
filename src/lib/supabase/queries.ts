@@ -1,4 +1,5 @@
 import { createClient } from "./server"
+import { isSupabaseConfigured } from "./env"
 import { normalizePostRow, rowToArticle, rowToCategory } from "./transforms"
 import type { BlogCategoryRow, BlogPostRowWithCategory } from "@/types"
 
@@ -6,6 +7,9 @@ const PUBLISHED_POST_SELECT =
   "id, slug, title, excerpt, intro, category_id, tags, cover_image_url, sections, content_text, read_time, featured, published, published_at, created_at, updated_at, blog_categories(id, slug, name)"
 
 export async function getPublishedPosts() {
+  // Sem Supabase configurado (ex.: rodando local sem .env.local), o blog fica vazio em vez de quebrar o site.
+  if (!isSupabaseConfigured()) return []
+
   const supabase = await createClient()
   const { data, error } = await supabase
     .from("blog_posts")
@@ -27,6 +31,9 @@ export async function getPublishedPosts() {
 const MIN_SIMILARITY = 0.35
 
 export async function searchPostsByEmbedding(embedding: number[], limit = 6) {
+  // Sem Supabase configurado (ex.: rodando local sem .env.local), o blog fica vazio em vez de quebrar o site.
+  if (!isSupabaseConfigured()) return []
+
   const supabase = await createClient()
   const { data: matches, error: matchError } = await supabase.rpc("match_blog_posts", {
     query_embedding: embedding,
@@ -119,6 +126,8 @@ export async function searchPostsByKeyword(query: string, limit = 6) {
     return []
   }
 
+  if (!isSupabaseConfigured()) return []
+
   const supabase = await createClient()
   const { data, error } = await supabase
     .from("blog_posts")
@@ -155,6 +164,9 @@ export async function getPublishedCategories() {
 }
 
 export async function getPostBySlug(slug: string) {
+  // Sem Supabase configurado (ex.: rodando local sem .env.local), o blog fica vazio em vez de quebrar o site.
+  if (!isSupabaseConfigured()) return null
+
   const supabase = await createClient()
   const { data, error } = await supabase
     .from("blog_posts")

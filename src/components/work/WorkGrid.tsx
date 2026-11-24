@@ -55,7 +55,9 @@ export function WorkGrid({ projects }: WorkGridProps) {
                     {project.title}
                   </h3>
                   <div className="font-mono text-[13px] leading-[1.6] text-[var(--muted)]">
-                    {project.agency ? (
+                    {project.credit ? (
+                      <em className="not-italic font-medium text-[var(--ink)]">{project.credit}</em>
+                    ) : project.agency ? (
                       <>
                         Contributed at{" "}
                         <em className="not-italic font-medium text-[var(--ink)]">{project.agency}</em>

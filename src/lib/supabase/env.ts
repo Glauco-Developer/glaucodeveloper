@@ -46,3 +46,7 @@ export function isAdminEmail(email?: string | null) {
 
   return email.toLowerCase() === getAdminEmail()
 }
+
+export function isSupabaseConfigured() {
+  return getMissingEnv(["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY"]).length === 0
+}
