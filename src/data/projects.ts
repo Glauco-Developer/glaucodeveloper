@@ -5,8 +5,8 @@ export const projects: Project[] = [
     id: "dra-joelly-russo",
     title: "Dra. Joelly Russo",
     description:
-      "Website, blog and admin panel for a facial aesthetics clinic in Itapema & Balneário Camboriú, Brazil. Editorial, motion-rich design built for local SEO and WhatsApp bookings, with a custom panel for managing content and patient results.",
-    technologies: ["Next.js", "TypeScript", "Supabase", "GSAP", "Three.js"],
+      "Designed and built from scratch for a facial aesthetics brand in Brazil. A custom, motion-rich site with an AI treatment preview, a clinic CRM for leads and patient records, and local SEO and GEO built in.",
+    technologies: ["Next.js", "TypeScript", "Supabase", "OpenAI API", "SEO & GEO"],
     demoUrl: "https://drajoellyrusso.com.br",
     imageUrl: "/projects/dra-joelly-russo.webp",
     featured: true,
